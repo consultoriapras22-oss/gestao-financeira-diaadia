@@ -1,0 +1,14 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# O sistema é uma página própria em /sistema/ (arquivo estático) — não deve cair
+# no fallback da SPA. Só redirecionamos para a landing o que não existir.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = false
