@@ -1,0 +1,1875 @@
+<!-- Meu Fluxo Dia a Dia — build v3.0 + sidebar -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Meu Fluxo Dia a Dia</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Meu Fluxo Dia a Dia">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#161d27">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23161d27'/%3E%3Ctext x='50' y='68' font-size='58' text-anchor='middle' fill='%234fd1a5' font-family='Georgia,serif'%3EM%3C/text%3E%3C/svg%3E">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+:root{
+  --bg:#161d27;
+  --surface:#1f2a38;
+  --surface-2:#26333f;
+  --line:#324055;
+  --text:#edeff2;
+  --text-muted:#8ea0b3;
+  --mint:#4fd1a5;
+  --amber:#e8a33d;
+  --coral:#e1543d;
+  --violet:#8b7fd6;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Inter',sans-serif;
+  min-height:100vh;
+  padding:0;
+}
+h1,h2,h3{font-family:'Fraunces',serif; margin:0;}
+
+/* ===== SIDEBAR LAYOUT ===== */
+#appShellWrapper{
+  display:grid;
+  grid-template-columns:260px minmax(0,1fr);
+  min-height:100vh;
+}
+#sidebar{
+  background:#111923;
+  border-right:1px solid var(--line);
+  padding:20px 12px;
+  position:sticky;
+  top:0;
+  height:100vh;
+  overflow-y:auto;
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+.sidebar-brand{
+  padding:4px 8px 14px;
+  border-bottom:1px solid var(--line);
+}
+.sidebar-brand h1{font-size:21px; line-height:1.1; margin-top:6px;}
+.sidebar-section{display:flex; flex-direction:column; gap:3px;}
+.sidebar-section-title{
+  font:10px 'IBM Plex Mono',monospace;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--text-muted);
+  padding:0 8px 6px;
+}
+.sidebar-nav-btn{
+  width:100%;
+  border:0;
+  background:transparent;
+  color:var(--text-muted);
+  cursor:pointer;
+  padding:9px 10px;
+  border-radius:9px;
+  font:600 13px 'Inter',sans-serif;
+  text-align:left;
+  display:flex;
+  align-items:center;
+  gap:9px;
+  transition:.15s ease;
+  text-decoration:none;
+}
+.sidebar-nav-btn:hover{background:var(--surface); color:var(--text);}
+.sidebar-nav-btn.active{background:rgba(79,209,165,.14); color:var(--mint);}
+.sidebar-nav-btn .nav-icon{width:18px; text-align:center; opacity:.9; flex-shrink:0;}
+.sidebar-scope{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:4px;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:4px;
+}
+.sidebar-scope button{
+  border:0;
+  border-radius:7px;
+  padding:7px 3px;
+  background:transparent;
+  color:var(--text-muted);
+  font:600 11px 'Inter',sans-serif;
+  cursor:pointer;
+}
+.sidebar-scope button.active{background:var(--mint); color:#0f1a17;}
+/* Sidebar bottom: Relatório, Configurações, Sair, ← Site */
+.sidebar-bottom{
+  margin-top:auto;
+  padding-top:12px;
+  border-top:1px solid var(--line);
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+}
+.sidebar-nav-btn.danger{color:var(--coral);}
+.sidebar-nav-btn.danger:hover{background:rgba(225,84,61,.12); color:var(--coral);}
+.sidebar-nav-btn.site-link{color:var(--text-muted);}
+
+#mainContentArea{min-width:0; padding:28px 30px 60px;}
+
+@media (max-width:860px){
+  #appShellWrapper{display:block;}
+  #sidebar{
+    position:relative;
+    height:auto;
+    padding:12px;
+    flex-direction:row;
+    flex-wrap:wrap;
+    gap:8px;
+    align-items:center;
+  }
+  .sidebar-brand{border-bottom:none; padding:0 6px;}
+  .sidebar-brand h1{font-size:17px;}
+  .sidebar-section{flex-direction:row; flex-wrap:wrap;}
+  .sidebar-section-title{display:none;}
+  .sidebar-bottom{
+    margin-top:0;
+    padding-top:0;
+    border-top:none;
+    flex-direction:row;
+    flex-wrap:wrap;
+  }
+  #mainContentArea{padding:18px 14px 40px;}
+}
+
+/* ===== ORIGINAL STYLES ===== */
+.eyebrow{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--text-muted);
+}
+.mono{font-family:'IBM Plex Mono',monospace;}
+.header{
+  max-width:1180px;
+  margin:0 auto 28px;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:16px;
+  flex-wrap:wrap;
+}
+.header h1{font-size:32px; font-weight:600; letter-spacing:-0.01em;}
+.summary-strip{
+  max-width:1180px;
+  margin:0 auto 32px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:12px;
+}
+.summary-item{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:16px 18px;}
+.summary-item .val{font-family:'IBM Plex Mono',monospace; font-size:22px; font-weight:600; margin-top:6px;}
+.summary-item .sub{margin-top:10px; padding-top:9px; border-top:1px solid var(--line); font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:.06em; font-family:'IBM Plex Mono',monospace;}
+.summary-item .sub-val{font-family:'IBM Plex Mono',monospace; font-size:16px; font-weight:600; margin-top:3px; text-transform:none; letter-spacing:0;}
+.summary-item.warn .val{color:var(--amber);}
+.summary-item.danger .val{color:var(--coral);}
+.summary-item.ok .val{color:var(--mint);}
+.layout{max-width:1180px; margin:0 auto; display:grid; grid-template-columns:380px 1fr; gap:28px; align-items:start;}
+@media (max-width:880px){.layout{grid-template-columns:1fr;}}
+.resumo-grid{grid-template-columns:1fr 1fr;}
+@media (max-width:880px){.resumo-grid{grid-template-columns:1fr;}}
+.fluxo-charts-grid{grid-template-columns:1.5fr 1fr; margin-bottom:20px;}
+@media (max-width:880px){.fluxo-charts-grid{grid-template-columns:1fr;}}
+.cards-col{display:flex; flex-direction:column; gap:16px;}
+.credit-card{border-radius:18px; padding:20px 22px; position:relative; overflow:hidden; cursor:pointer; border:1px solid rgba(255,255,255,0.08); transition:transform .15s ease; min-height:150px; display:flex; flex-direction:column; justify-content:space-between;}
+.credit-card:hover{transform:translateY(-2px);}
+.credit-card.selected{outline:2px solid var(--mint); outline-offset:2px;}
+.credit-card .chip{width:34px;height:24px;border-radius:5px;background:linear-gradient(135deg,rgba(255,255,255,.65),rgba(255,255,255,.25));}
+.credit-card .top-row{display:flex; justify-content:space-between; align-items:flex-start;}
+.credit-card .name{font-family:'Fraunces',serif; font-size:19px; font-weight:600; margin-top:10px;}
+.credit-card .dates{font-family:'IBM Plex Mono',monospace; font-size:11px; opacity:.85; margin-top:2px;}
+.credit-card .bar-track{height:6px; border-radius:4px; background:rgba(255,255,255,.22); margin-top:14px; overflow:hidden;}
+.credit-card .bar-fill{height:100%; border-radius:4px; background:#fff;}
+.credit-card .bottom-row{display:flex; justify-content:space-between; align-items:baseline; margin-top:8px; font-family:'IBM Plex Mono',monospace; font-size:12px;}
+.credit-card .bottom-row .used{font-size:16px; font-weight:600;}
+.credit-card .del-btn{position:absolute; top:10px; right:10px; background:rgba(0,0,0,.25); border:none; color:#fff; width:22px;height:22px;border-radius:6px; cursor:pointer; font-size:13px; line-height:1; opacity:0; transition:opacity .15s; z-index:2;}
+.credit-card .edit-btn{position:absolute; top:10px; right:40px; background:rgba(0,0,0,.25); border:none; color:#fff; width:22px;height:22px;border-radius:6px; cursor:pointer; font-size:13px; line-height:1; opacity:0; transition:opacity .15s; z-index:2;}
+.credit-card:hover .del-btn, .credit-card:hover .edit-btn{opacity:1;}
+.add-card-btn{background:var(--surface); border:1px dashed var(--line); border-radius:14px; padding:16px; color:var(--text-muted); font-family:'Inter',sans-serif; font-size:14px; cursor:pointer; text-align:left;}
+.add-card-btn:hover{border-color:var(--mint); color:var(--mint);}
+.panel{background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:24px;}
+.panel + .panel{margin-top:20px;}
+.panel-head{display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap; gap:10px;}
+.panel-head h2{font-size:20px; font-weight:600;}
+.btn{font-family:'Inter',sans-serif; font-size:13px; font-weight:600; border-radius:9px; padding:9px 16px; border:none; cursor:pointer;}
+.btn-primary{background:var(--mint); color:#0f1a17;}
+.btn-primary:hover{filter:brightness(1.08);}
+.btn-ghost{background:transparent; border:1px solid var(--line); color:var(--text);}
+.btn-ghost:hover{border-color:var(--text-muted);}
+.form-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:12px; margin-bottom:14px;}
+label{font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:.06em; display:block; margin-bottom:5px; font-family:'IBM Plex Mono',monospace;}
+input,select{width:100%; background:var(--surface-2); border:1px solid var(--line); border-radius:8px; padding:9px 10px; color:var(--text); font-family:'Inter',sans-serif; font-size:14px;}
+input:focus,select:focus{outline:none; border-color:var(--mint);}
+input[type=color]{padding:3px; height:38px;}
+table{width:100%; border-collapse:collapse; font-size:13.5px;}
+th{text-align:left; font-family:'IBM Plex Mono',monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:.06em; color:var(--text-muted); padding:8px 10px; border-bottom:1px solid var(--line);}
+td{padding:10px; border-bottom:1px solid rgba(255,255,255,.05);}
+tr:hover td{background:rgba(255,255,255,.02);}
+.val-cell{font-family:'IBM Plex Mono',monospace; text-align:right;}
+.tag{font-family:'IBM Plex Mono',monospace; font-size:11px; padding:3px 8px; border-radius:20px; background:rgba(255,255,255,.06); color:var(--text-muted); display:inline-block;}
+.row-del{background:none; border:none; color:var(--text-muted); cursor:pointer; font-size:14px;}
+.row-del:hover{color:var(--coral);}
+.empty{color:var(--text-muted); font-size:13.5px; padding:20px 4px; text-align:center;}
+.bars{display:flex; flex-direction:column; gap:10px;}
+.bar-row{display:grid; grid-template-columns:110px 1fr 90px; align-items:center; gap:10px; font-size:13px;}
+.bar-row .bar-bg{height:10px; border-radius:6px; background:var(--surface-2); overflow:hidden;}
+.bar-row .bar-fg{height:100%; border-radius:6px;}
+.bar-row .amt{font-family:'IBM Plex Mono',monospace; text-align:right; color:var(--text-muted); font-size:12px;}
+::-webkit-scrollbar{width:8px;height:8px;}
+::-webkit-scrollbar-thumb{background:var(--line); border-radius:4px;}
+#printReportArea{display:none;}
+@media print{
+  body *{visibility:hidden;}
+  #printReportArea, #printReportArea *{visibility:visible;}
+  #printReportArea{display:block; position:absolute; top:0; left:0; width:100%; background:#fff; color:#111; padding:20px;}
+  #printReportArea h1{font-family:'Fraunces',serif; font-size:24px; margin:0 0 4px;}
+  #printReportArea h2{font-family:'Fraunces',serif; font-size:16px; margin:22px 0 8px; border-bottom:1px solid #ccc; padding-bottom:4px;}
+  #printReportArea table{width:100%; border-collapse:collapse; font-size:12px; margin-bottom:6px;}
+  #printReportArea td, #printReportArea th{padding:5px 8px; border-bottom:1px solid #eee; text-align:left;}
+  #printReportArea .pr-right{text-align:right;}
+  #printReportArea .pr-muted{color:#666;}
+  #printReportArea .pr-total{font-weight:700; border-top:2px solid #999;}
+  #printReportArea .pr-meta{font-size:11px; color:#666; margin-bottom:14px;}
+}
+/* Painéis de configuração abrem dentro do mainContentArea */
+#themeWrap,#catManagerWrap,#securityWrap,#backupWrap,#sobreWrap{max-width:1180px; margin:0 auto 24px;}
+</style>
+</head>
+<body>
+
+<div id="printReportArea"></div>
+
+<!-- ACTIVATION OVERLAY -->
+<div id="activationOverlay" style="display:none; position:fixed; inset:0; background:var(--bg); z-index:10001; align-items:flex-start; justify-content:center; padding:24px 18px; overflow:auto;">
+  <a href="/" style="position:absolute; top:16px; left:18px; color:var(--text-muted); font-size:13px; text-decoration:none; z-index:2;">← Página inicial</a>
+  <div class="panel" style="max-width:460px; width:100%; margin:auto;">
+    <div style="text-align:center; margin-bottom:20px;">
+      <div style="width:58px; height:58px; margin:0 auto 12px; border-radius:16px; background:var(--surface-2); display:flex; align-items:center; justify-content:center; border:1px solid var(--line);">
+        <span style="font-family:Georgia,serif; font-size:36px; color:var(--mint); line-height:1;">M</span>
+      </div>
+      <div class="eyebrow" style="margin-bottom:8px;">painel financeiro</div>
+      <h2 style="font-size:25px; margin:0 0 8px;">Meu Fluxo Dia a Dia</h2>
+      <p style="font-size:13px; color:var(--text-muted); margin:0; line-height:1.55;">Controle financeiro pessoal e empresarial (PF/PJ) — cartões, financiamentos, fluxo de caixa, investimentos e metas, tudo em um só lugar.</p>
+    </div>
+    <div style="background:var(--surface-2); border:1px solid var(--line); border-radius:12px; padding:16px 18px; margin-bottom:18px;">
+      <div style="display:grid; gap:10px;">
+        <div style="font-size:14px;">✅ Acesso vitalício</div>
+        <div style="font-size:14px;">✅ Atualizações gratuitas</div>
+        <div style="font-size:14px;">✅ Backup dos dados</div>
+        <div style="font-size:14px;">✅ Acesso pelo celular</div>
+        <div style="font-size:14px;">✅ Acesso pelo computador</div>
+        <div style="font-size:14px;">✅ Sem mensalidade</div>
+        <div style="font-size:14px;">✅ Suporte por 90 dias</div>
+      </div>
+    </div>
+    <div style="text-align:center; margin-bottom:18px;">
+      <div style="font-size:40px; font-weight:700; color:var(--mint); line-height:1.05;">R$ 149,90</div>
+      <div style="font-size:13px; color:var(--amber); font-weight:600; margin-top:5px;">pagamento único · sem mensalidade</div>
+    </div>
+    <button class="btn btn-primary" id="comprarBtn" style="width:100%; margin-bottom:24px; font-size:15px; padding:12px;">Quero comprar</button>
+    <div style="border-top:1px solid var(--line); padding-top:18px;">
+      <div class="eyebrow" style="margin-bottom:6px;">já comprou?</div>
+      <h2 style="font-size:18px; margin:0 0 8px;">Digite sua chave de ativação</h2>
+      <p style="font-size:12.5px; color:var(--text-muted); margin:0 0 14px; line-height:1.5;">Essa chave foi enviada a você por quem lhe vendeu este acesso.</p>
+      <input type="text" id="activationCodeInput" placeholder="Chave de ativação" style="width:100%; margin-bottom:10px; background:var(--surface-2); border:1px solid var(--line); border-radius:8px; color:var(--text); padding:10px 12px; font-family:'IBM Plex Mono',monospace; font-size:14px; text-transform:uppercase;">
+      <div id="activationErrorMsg" style="color:var(--coral); font-size:13px; min-height:18px; margin-bottom:10px;"></div>
+      <button class="btn btn-primary" id="activationSubmitBtn" style="width:100%;">Ativar acesso</button>
+    </div>
+  </div>
+</div>
+
+<!-- CREATE PASSWORD OVERLAY -->
+<div id="createPasswordOverlay" style="display:none; position:fixed; inset:0; background:var(--bg); z-index:10001; align-items:center; justify-content:center; padding:20px;">
+  <div class="panel" style="max-width:380px; width:100%;">
+    <div class="eyebrow" style="margin-bottom:6px;">primeiro acesso</div>
+    <h2 style="font-size:20px; margin:0 0 8px;">Crie sua senha</h2>
+    <p style="font-size:12.5px; color:var(--text-muted); margin:0 0 16px; line-height:1.5;">Acesso liberado! Defina uma senha para proteger seus dados. Nos próximos acessos você entrará apenas com ela.</p>
+    <div style="position:relative; margin-bottom:10px;">
+      <input type="password" id="createPw1" placeholder="Senha (mínimo 4 caracteres)" style="width:100%; background:var(--surface-2); border:1px solid var(--line); border-radius:8px; color:var(--text); padding:10px 44px 10px 12px; font-family:'Inter',sans-serif; font-size:14px;">
+      <button type="button" class="pw-toggle" data-target="createPw1" style="position:absolute; right:4px; top:50%; transform:translateY(-50%); background:none; border:none; color:var(--text-muted); cursor:pointer; font-size:16px; padding:6px 8px;">👁</button>
+    </div>
+    <div style="position:relative; margin-bottom:10px;">
+      <input type="password" id="createPw2" placeholder="Confirme a senha" style="width:100%; background:var(--surface-2); border:1px solid var(--line); border-radius:8px; color:var(--text); padding:10px 44px 10px 12px; font-family:'Inter',sans-serif; font-size:14px;">
+      <button type="button" class="pw-toggle" data-target="createPw2" style="position:absolute; right:4px; top:50%; transform:translateY(-50%); background:none; border:none; color:var(--text-muted); cursor:pointer; font-size:16px; padding:6px 8px;">👁</button>
+    </div>
+    <div id="createPwError" style="color:var(--coral); font-size:13px; min-height:18px; margin-bottom:10px;"></div>
+    <button class="btn btn-primary" id="createPwBtn" style="width:100%;">Criar senha e entrar</button>
+  </div>
+</div>
+
+<!-- LOCK SCREEN -->
+<div id="lockScreenOverlay" style="display:none; position:fixed; inset:0; background:var(--bg); z-index:10000; align-items:center; justify-content:center; padding:20px;">
+  <a href="/" style="position:absolute; top:16px; left:18px; color:var(--text-muted); font-size:13px; text-decoration:none; z-index:2;">← Página inicial</a>
+  <div class="panel" style="max-width:360px; width:100%;">
+    <div class="eyebrow" style="margin-bottom:6px;">acesso protegido</div>
+    <h2 style="font-size:20px; margin-bottom:16px;">Digite a senha</h2>
+    <div style="position:relative; margin-bottom:10px;">
+      <input type="password" id="lockPasswordInput" placeholder="Senha" style="width:100%; background:var(--surface-2); border:1px solid var(--line); border-radius:8px; color:var(--text); padding:10px 44px 10px 12px; font-family:'Inter',sans-serif; font-size:14px;">
+      <button type="button" class="pw-toggle" data-target="lockPasswordInput" style="position:absolute; right:4px; top:50%; transform:translateY(-50%); background:none; border:none; color:var(--text-muted); cursor:pointer; font-size:16px; padding:6px 8px;">👁</button>
+    </div>
+    <div id="lockErrorMsg" style="color:var(--coral); font-size:13px; min-height:18px; margin-bottom:10px;"></div>
+    <button class="btn btn-primary" id="lockSubmitBtn" style="width:100%;">Entrar</button>
+    <div style="text-align:center; margin-top:14px;">
+      <button class="btn btn-ghost" id="forgotPasswordBtn" style="font-size:12.5px; padding:6px 10px;">Esqueceu a senha?</button>
+    </div>
+    <div id="recoveryWrap" style="display:none; margin-top:12px; padding-top:12px; border-top:1px solid var(--line); font-size:12.5px; color:var(--text-muted); line-height:1.6;">
+      Por segurança, a senha não pode ser recuperada por aqui. Fale com o suporte no <a href="https://wa.me/5541999917429" target="_blank" rel="noopener" style="color:var(--mint); text-decoration:none;">WhatsApp (41) 99991-7429</a>.
+    </div>
+  </div>
+</div>
+
+<!-- HIDDEN LEGACY MENU WRAPS (mantidos para compatibilidade com JS) -->
+<div id="mainMenuWrap" style="display:none;"></div>
+<div id="configMenuWrap" style="display:none;"></div>
+
+<!-- APP SHELL: SIDEBAR + CONTENT -->
+<div id="appShellWrapper">
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside id="sidebar" aria-label="Navegação principal">
+
+    <div class="sidebar-brand">
+      <div class="eyebrow">painel financeiro · v3.0</div>
+      <h1>Meu Fluxo<br>Dia a Dia</h1>
+      <div class="eyebrow" id="lastUpdatedLabel" style="margin-top:8px; font-size:9.5px;"></div>
+    </div>
+
+    <!-- Seletor PF / PJ / Geral -->
+    <div>
+      <div class="sidebar-section-title">Visão financeira</div>
+      <div class="sidebar-scope" id="sidebarScopeBar">
+        <button type="button" data-sidebar-scope="PF">PF</button>
+        <button type="button" data-sidebar-scope="PJ">PJ</button>
+        <button type="button" data-sidebar-scope="todas" class="active">Geral</button>
+      </div>
+    </div>
+
+    <!-- Navegação principal -->
+    <nav class="sidebar-section" id="sidebarPrimaryNav">
+      <div class="sidebar-section-title">Navegação</div>
+      <button class="sidebar-nav-btn active" data-sidebar-view="resumo"><span class="nav-icon">◈</span>Visão geral</button>
+      <button class="sidebar-nav-btn" data-sidebar-view="fluxo"><span class="nav-icon">↕</span>Fluxo de caixa</button>
+      <button class="sidebar-nav-btn" data-sidebar-view="contas"><span class="nav-icon">▣</span>Contas</button>
+      <button class="sidebar-nav-btn" data-sidebar-view="cards"><span class="nav-icon">▤</span>Cartões</button>
+      <button class="sidebar-nav-btn" data-sidebar-view="investimentos"><span class="nav-icon">↗</span>Aplicações</button>
+      <button class="sidebar-nav-btn" data-sidebar-view="metas"><span class="nav-icon">◎</span>Metas</button>
+      <button class="sidebar-nav-btn" data-sidebar-view="financiamentos"><span class="nav-icon">◫</span>Financiamentos</button>
+      <div id="sidebarCustomNav"></div>
+      <button class="sidebar-nav-btn" id="sidebarAddBoard"><span class="nav-icon">＋</span>Nova tabela</button>
+    </nav>
+
+    <!-- Rodapé da sidebar: Relatório · Configurações · Sair · ← Site -->
+    <div class="sidebar-bottom">
+      <button class="sidebar-nav-btn" id="sidebarReport"><span class="nav-icon">▧</span>Relatório PDF</button>
+      <button class="sidebar-nav-btn" id="sidebarSettings"><span class="nav-icon">⚙</span>Configurações</button>
+      <!-- BOTÃO SAIR — fora do menu de configurações, direto na sidebar -->
+      <button class="sidebar-nav-btn danger" id="sidebarLogout"><span class="nav-icon">⏻</span>Sair</button>
+      <!-- LINK VOLTAR AO SITE DE VENDAS -->
+      <a href="/" class="sidebar-nav-btn site-link"><span class="nav-icon">←</span>Voltar ao site</a>
+    </div>
+
+  </aside>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <div id="mainContentArea">
+
+    <!-- Painéis de configuração (abrem aqui dentro) -->
+    <div id="themeWrap" style="display:none;"></div>
+    <div id="catManagerWrap" style="display:none;"></div>
+    <div id="securityWrap" style="display:none;"></div>
+    <div id="backupWrap" style="display:none;"></div>
+    <div id="sobreWrap" style="display:none;"></div>
+
+    <!-- Painel de configurações inline (sidebar) -->
+    <div id="sidebarConfigPanel" style="display:none; max-width:1180px; margin:0 auto 20px;">
+      <div class="panel">
+        <div class="panel-head"><h2>Configurações</h2><button class="btn btn-ghost" id="sidebarConfigClose" style="padding:6px 12px; font-size:12px;">✕ Fechar</button></div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <button class="btn btn-ghost" id="themeBtn">Aparência</button>
+          <button class="btn btn-ghost" id="manageCatBtn">Categorias</button>
+          <button class="btn btn-ghost" id="securityBtn">Segurança</button>
+          <button class="btn btn-ghost" id="backupBtn">Backup</button>
+          <button class="btn btn-ghost" id="exportBtn">Exportar CSV</button>
+          <button class="btn btn-ghost" id="sobreBtn">Sobre</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Painel de menu / nova tabela inline -->
+    <div id="sidebarMenuPanel" style="display:none; max-width:1180px; margin:0 auto 20px;">
+      <div class="panel">
+        <div class="panel-head"><h2>Tabelas personalizadas</h2><button class="btn btn-ghost" id="sidebarMenuClose" style="padding:6px 12px; font-size:12px;">✕ Fechar</button></div>
+        <div id="mainNavWrap" style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px;"></div>
+        <button class="btn btn-ghost" id="appNavAddBoardBtn">+ Nova tabela</button>
+      </div>
+    </div>
+
+    <!-- Botão de relatório e filtro de escopo (legado, mantido para JS) -->
+    <div id="topHeader" style="display:none;">
+      <button class="btn btn-ghost" id="menuBtn">Menu</button>
+      <button class="btn btn-ghost" id="configBtn">Config</button>
+      <button class="btn btn-primary" id="printReportBtn">Relatório</button>
+      <button class="btn btn-ghost" id="logoutBtn">Sair</button>
+    </div>
+
+    <!-- ===== SEÇÕES DE CONTEÚDO ===== -->
+
+    <div id="resumoAppSection" style="display:none;">
+      <div class="header" style="max-width:1180px; margin:0 auto 16px; padding:0;">
+        <h2 style="font-size:24px;">Resumo geral</h2>
+      </div>
+      <div class="filtro-escopo"></div>
+      <div class="summary-strip" id="resumoSummaryStrip"></div>
+      <div class="periodo-agenda" style="max-width:1180px; margin:0 auto;"></div>
+      <div class="layout resumo-grid">
+        <div class="panel"><div class="panel-head"><h2>A pagar</h2></div><div id="resumoProximosVencimentos"><div class="empty">Nada vencendo no período.</div></div></div>
+        <div class="panel"><div class="panel-head"><h2>A receber</h2></div><div id="resumoProximosRecebimentos"><div class="empty">Nada a receber no período.</div></div></div>
+      </div>
+      <div class="panel" style="max-width:1180px; margin:0 auto 20px;">
+        <div class="panel-head"><h2>Fatura do mês por cartão</h2></div>
+        <p style="font-size:12.5px; color:var(--text-muted); margin:0 0 12px; line-height:1.5;">Próxima fatura em aberto de cada cartão — mostrada sempre, independentemente do período selecionado acima.</p>
+        <div id="resumoFaturasCartao"><div class="empty">Cadastre um cartão para ver as faturas.</div></div>
+      </div>
+      <div class="panel" style="max-width:1180px; margin:0 auto 20px;">
+        <div class="panel-head"><h2>DRE simplificado</h2></div>
+        <div id="resumoDRE"><div class="empty">Sem dados ainda.</div></div>
+      </div>
+      <div class="panel" style="max-width:1180px; margin:0 auto 20px;">
+        <div class="panel-head"><h2>Simulador de quitação antecipada</h2></div>
+        <p style="font-size:12.5px; color:var(--text-muted); margin:0 0 14px; line-height:1.5;">Estimativa simplificada, sem considerar juros.</p>
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px; flex-wrap:wrap;">
+          <label style="font-size:13px; color:var(--text-muted);">Quanto consigo pagar de extra por mês (R$)</label>
+          <input type="number" id="simuladorAporteExtra" value="0" style="width:150px; background:var(--surface-2); border:1px solid var(--line); border-radius:8px; color:var(--text); padding:9px 10px; font-family:'IBM Plex Mono',monospace;">
+        </div>
+        <div id="resumoSimulador"></div>
+      </div>
+      <div class="layout resumo-grid">
+        <div class="panel"><div class="panel-head"><h2>Uso do limite por cartão</h2></div><div class="bars" id="resumoLimiteBars"><div class="empty">Cadastre um cartão para ver.</div></div></div>
+        <div class="panel"><div class="panel-head"><h2>Composição do que você deve</h2></div><div id="resumoComposicaoChart"><div class="empty">Sem dados ainda.</div></div></div>
+      </div>
+      <div class="layout resumo-grid">
+        <div class="panel"><div class="panel-head"><h2>Cartões de crédito</h2></div><div id="resumoCardTotalsTable"><div class="empty">Cadastre um cartão para ver os totais.</div></div></div>
+        <div id="resumoBoardsWrap"></div>
+      </div>
+    </div>
+
+    <div id="cardsAppSection">
+      <div class="header" style="max-width:1180px; margin:0 auto 16px; padding:0;">
+        <h2 style="font-size:24px;">Cartões de crédito</h2>
+      </div>
+      <div class="filtro-escopo"></div>
+      <div class="summary-strip" id="summaryStrip"></div>
+      <div class="layout">
+        <div class="cards-col" id="cardsCol"></div>
+        <div class="main-col">
+          <div id="dashboardSection">
+            <div class="panel"><div class="panel-head"><h2>Totais por cartão</h2></div><div id="cardTotalsTable"><div class="empty">Cadastre um cartão para ver os totais.</div></div></div>
+          </div>
+          <div id="lancamentosSection">
+            <div class="panel">
+              <div class="panel-head"><h2 id="panelTitle">Selecione um cartão</h2><button class="btn btn-primary" id="addTxBtn" style="display:none;">+ Novo gasto</button></div>
+              <div id="txMonthNav" style="display:none; align-items:center; gap:8px; margin-bottom:14px; flex-wrap:wrap;">
+                <span class="eyebrow">fatura</span>
+                <button class="btn btn-ghost" id="txPrevMonthBtn" style="padding:6px 11px; font-size:12px;">‹</button>
+                <span id="txMonthLabel" class="mono" style="min-width:110px; text-align:center; font-size:13px;"></span>
+                <button class="btn btn-ghost" id="txNextMonthBtn" style="padding:6px 11px; font-size:12px;">›</button>
+                <button class="btn btn-ghost" id="txAllMonthsBtn" style="padding:6px 11px; font-size:12px; margin-left:6px;">Ver todos</button>
+                <button class="btn btn-ghost" id="txPrintBtn" style="padding:6px 11px; font-size:12px;">🖨 Imprimir</button>
+                <span id="txMonthTotal" class="mono" style="margin-left:auto; font-size:13px;"></span>
+              </div>
+              <div id="txFormWrap" style="display:none;"></div>
+              <div id="txTableWrap"><div class="empty">Cadastre um cartão para começar a lançar gastos.</div></div>
+            </div>
+          </div>
+          <div class="panel"><div class="panel-head"><h2 id="monthChartTitle">Gastos por mês</h2></div><div id="monthChart"><div class="empty">Sem dados ainda.</div></div></div>
+          <div class="panel"><div class="panel-head"><h2 id="catBarsTitle">Gastos por categoria</h2></div><div class="bars" id="catBars"><div class="empty">Sem dados ainda.</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="fluxoAppSection" style="display:none;">
+      <div class="header" style="max-width:1180px; margin:0 auto 16px; padding:0;">
+        <h2 style="font-size:24px; width:100%;">Fluxo de caixa</h2>
+      </div>
+      <div class="header" style="max-width:1180px; margin:0 auto 16px; padding:0;">
+        <div style="display:flex; align-items:center; gap:14px;">
+          <button class="btn btn-ghost" id="fluxoPrevMonthBtn">‹</button>
+          <h2 id="fluxoMonthLabel" style="font-size:22px; min-width:160px; text-align:center;"></h2>
+          <button class="btn btn-ghost" id="fluxoNextMonthBtn">›</button>
+          <div class="filtro-escopo" style="margin-left:14px;"></div>
+        </div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <div style="display:flex; align-items:center; gap:6px;">
+            <label style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:.06em; font-family:'IBM Plex Mono',monospace;">Saldo inicial</label>
+            <input type="number" id="fluxoSaldoInicial" style="width:130px; background:var(--surface-2); border:1px solid var(--line); border-radius:8px; color:var(--text); padding:8px 10px; font-family:'IBM Plex Mono',monospace;">
+          </div>
+          <div style="display:flex; align-items:center; gap:6px;">
+            <label style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:.06em; font-family:'IBM Plex Mono',monospace;">Limite cheque especial</label>
+            <input type="number" id="fluxoLimiteConta" style="width:120px; background:var(--surface-2); border:1px solid var(--line); border-radius:8px; color:var(--text); padding:8px 10px; font-family:'IBM Plex Mono',monospace;">
+          </div>
+          <div style="display:flex; align-items:center; gap:6px;">
+            <label style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:.06em; font-family:'IBM Plex Mono',monospace;">Juros a.m. (%)</label>
+            <input type="number" step="0.1" id="fluxoJurosConta" style="width:90px; background:var(--surface-2); border:1px solid var(--line); border-radius:8px; color:var(--text); padding:8px 10px; font-family:'IBM Plex Mono',monospace;">
+          </div>
+          <button class="btn btn-primary" id="fluxoAddReceitaBtn">+ Receita</button>
+          <button class="btn btn-ghost" id="fluxoAddDespesaBtn">+ Conta / Despesa</button>
+        </div>
+      </div>
+      <div class="panel" style="max-width:1180px; margin:0 auto 20px;">
+        <div class="panel-head"><h2>Entradas e saídas</h2></div>
+        <label style="display:flex; align-items:center; gap:8px; font-size:13px; margin-bottom:14px; cursor:pointer; color:var(--text-muted);">
+          <input type="checkbox" id="fluxoIncluirSaldoChk" checked style="width:16px;height:16px;accent-color:var(--mint);">
+          Incluir saldo anterior
+        </label>
+        <div id="fluxoEntradasSaidasBody"></div>
+        <div id="fluxoJurosContaWrap" style="margin-top:14px;"></div>
+      </div>
+      <div id="fluxoBlocksWrap" style="max-width:1180px; margin:0 auto;"></div>
+    </div>
+
+    <div id="boardAppSection" style="display:none;">
+      <div class="header" style="max-width:1180px; margin:0 auto 16px; padding:0;">
+        <h2 id="boardTitle" style="font-size:24px;"></h2>
+        <div style="display:flex; gap:10px;">
+          <button class="btn btn-ghost" id="boardMoveLeftBtn">◀ Mover</button>
+          <button class="btn btn-ghost" id="boardMoveRightBtn">Mover ▶</button>
+          <button class="btn btn-ghost" id="renameBoardBtn">Renomear tabela</button>
+          <button class="btn btn-ghost" id="deleteBoardBtn">Excluir tabela</button>
+        </div>
+      </div>
+      <div class="filtro-escopo"></div>
+      <div class="summary-strip" id="boardSummaryStrip"></div>
+      <div class="layout">
+        <div class="cards-col" id="boardItemsCol"></div>
+        <div class="main-col">
+          <div class="panel"><div class="panel-head"><h2>Totais</h2></div><div id="boardTotalsTable"><div class="empty">Cadastre um item para ver os totais.</div></div></div>
+          <div class="panel"><div class="panel-head"><h2>Parcelas por mês</h2></div><div id="boardMonthChart"><div class="empty">Sem dados ainda.</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="investAppSection" style="display:none;">
+      <div class="header" style="max-width:1180px; margin:0 auto 16px; padding:0;">
+        <h2 style="font-size:24px;">Aplicações financeiras</h2>
+        <button class="btn btn-ghost" id="printInvestBtn">🖨 Imprimir posição</button>
+      </div>
+      <div class="filtro-escopo"></div>
+      <div class="summary-strip" id="investSummaryStrip"></div>
+      <div class="layout">
+        <div class="cards-col" id="investCol"></div>
+        <div class="main-col">
+          <div class="panel"><div class="panel-head"><h2>Totais das aplicações</h2></div><div id="investTotalsTable"><div class="empty">Cadastre uma aplicação para ver os totais.</div></div></div>
+          <div class="panel"><div class="panel-head"><h2>Rendimento líquido estimado</h2></div><div id="investLiquidoTable"><div class="empty">Sem dados ainda.</div></div></div>
+          <div class="panel"><div class="panel-head"><h2>Saldo inicial x valor atual</h2></div><div class="bars" id="investGrowthBars"><div class="empty">Sem dados ainda.</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="goalsAppSection" style="display:none;">
+      <div class="header" style="max-width:1180px; margin:0 auto 16px; padding:0;"><h2 style="font-size:24px;">Metas financeiras</h2></div>
+      <div class="filtro-escopo"></div>
+      <div class="summary-strip" id="goalsSummaryStrip"></div>
+      <div class="layout">
+        <div class="cards-col" id="goalsCol"></div>
+        <div class="main-col"><div class="panel"><div class="panel-head"><h2>Progresso das metas</h2></div><div id="goalsTotalsTable"><div class="empty">Cadastre uma meta para ver os detalhes.</div></div></div></div>
+      </div>
+    </div>
+
+    <div id="accountsAppSection" style="display:none;">
+      <div class="header" style="max-width:1180px; margin:0 auto 16px; padding:0;">
+        <h2 style="font-size:24px;">Contas</h2>
+        <div style="display:flex; gap:8px;">
+          <button class="btn btn-primary" id="transferBtn">⇄ Transferir entre contas</button>
+          <button class="btn btn-ghost" id="printAccountsBtn">🖨 Imprimir extrato</button>
+        </div>
+      </div>
+      <div class="filtro-escopo"></div>
+      <div class="summary-strip" id="accountsSummaryStrip"></div>
+      <div class="layout">
+        <div class="cards-col" id="accountsCol"></div>
+        <div class="main-col">
+          <div class="panel"><div class="panel-head"><h2>Totais das contas</h2></div><div id="accountsTotalsTable"><div class="empty">Cadastre uma conta para ver os totais.</div></div></div>
+          <div class="panel" style="margin-top:16px;">
+            <div class="panel-head"><h2>Transferências entre contas</h2></div>
+            <p style="font-size:12.5px; color:var(--text-muted); margin:0 0 12px; line-height:1.5;">Move saldo de uma conta para outra. <strong>Não conta como receita nem despesa</strong>.</p>
+            <div id="accountsTransfersWrap"><div class="empty">Nenhuma transferência registrada.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /mainContentArea -->
+</div><!-- /appShellWrapper -->
+
+<footer style="max-width:none; padding:20px 30px 34px; border-top:1px solid var(--line); color:var(--text-muted); font-size:12px; line-height:1.7; margin-left:260px;">
+  <div style="font-weight:600; color:var(--text); font-size:13px;">Meu Fluxo Dia a Dia · Versão 3.0</div>
+  <div>Desenvolvido por PRAS Desenvolvimento — CNPJ 60.316.587/0001-74</div>
+  <div>WhatsApp (41) 99991-7429 · consultoria.pras22@gmail.com</div>
+  <div style="margin-top:4px;">Todos os direitos reservados.</div>
+</footer>
+
+<script>
+const STORAGE_KEY = 'cartoes-state-v1';
+const BACKUPS_KEY = 'cartoes-backups-v1';
+const APP_VERSION = '3.0.2';
+const MAX_BACKUPS = 12;
+const LINK_COMPRA = 'https://wa.me/5541999917429';
+const MSG_COMPRA = 'Olá! Quero adquirir o Meu Fluxo Dia a Dia 3.0 por R$ 149,90, em pagamento único. Pode me orientar sobre a compra?';
+const DEFAULT_CATEGORIES = ['Alimentação','Transporte','Moradia','Lazer','Saúde','Educação','Compras','Assinaturas','Outros'];
+const DEFAULT_THEME = { bg:'#161d27', surface:'#1f2a38', mint:'#4fd1a5', amber:'#e8a33d', coral:'#e1543d', text:'#edeff2' };
+const THEME_PRESETS = [
+  { nome:'Verde-noite (padrão)', bg:'#161d27', surface:'#1f2a38', mint:'#4fd1a5', amber:'#e8a33d', coral:'#e1543d', text:'#edeff2' },
+  { nome:'Violeta profundo', bg:'#181521', surface:'#231d31', mint:'#8b7fd6', amber:'#e8a33d', coral:'#e1543d', text:'#eeeaf7' },
+  { nome:'Âmbar quente', bg:'#201a14', surface:'#2e2419', mint:'#e8a33d', amber:'#d68fb0', coral:'#e1543d', text:'#f5ede1' },
+  { nome:'Azul aço', bg:'#131b26', surface:'#1c2a38', mint:'#5b9bd5', amber:'#e8a33d', coral:'#e1543d', text:'#e8eef5' }
+];
+const INITIAL_STATE = {
+  "cards":[],"transactions":[],"selectedCard":null,
+  "categories":["Alimentação","Transporte","Moradia","Lazer","Saúde","Educação","Compras","Assinaturas","Outros"],
+  "theme":{"bg":"#161d27","surface":"#1f2a38","mint":"#4fd1a5","amber":"#e8a33d","coral":"#e1543d","text":"#edeff2"},
+  "boards":[{"id":"financiamentos","nome":"Financiamentos","items":[]}],
+  "saldoInicial":0,"cashFlowEntries":[],"autoPaidMap":{},"security":{"passwordHash":null},
+  "navOrder":["resumo","cards","fluxo","investimentos","metas","contas","financiamentos"],
+  "investments":[],"goals":[],"accounts":[],"budgets":{},
+  "contaLimite":{"limite":0,"taxaJurosMensal":0},"activated":false,
+  "fluxoBlockOrder":["lancamentos","topCategorias","origemChart","saldoChart","trendChart","fixoVariavel","recorrentes","insights","alerta"]
+};
+let state = JSON.parse(JSON.stringify(INITIAL_STATE));
+
+const MONTH_NAMES = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+const CARD_COLORS = [['#2b4162','#12203a'],['#4a3a63','#231636'],['#1f5c52','#0e2d27'],['#6b3a3a','#331616'],['#3a5566','#152833'],['#5c4a2b','#2d2210']];
+const CHART_COLORS = ['#4fd1a5','#e8a33d','#8b7fd6','#e1543d','#5b9bd5','#d68fb0','#7fd1c9','#c9a34f','#9fb35b'];
+
+function fmt(n){ return (n<0?'-':'')+'R$ '+Math.abs(n).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+function todayStr(){ return new Date().toISOString().slice(0,10); }
+
+function dialogOverlay(innerHtml){
+  const overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;';
+  overlay.innerHTML = `<div class="panel" style="max-width:380px; width:100%; margin:0;">${innerHtml}</div>`;
+  document.body.appendChild(overlay);
+  return overlay;
+}
+function showAlert(message){
+  const overlay = dialogOverlay(`<p style="margin:0 0 16px; font-size:14px; line-height:1.5;">${message}</p><div style="display:flex; justify-content:flex-end;"><button class="btn btn-primary" id="__dlgOk">OK</button></div>`);
+  document.getElementById('__dlgOk').addEventListener('click', ()=> overlay.remove());
+}
+function showConfirm(message, onYes){
+  const overlay = dialogOverlay(`<p style="margin:0 0 16px; font-size:14px; line-height:1.5;">${message}</p><div style="display:flex; gap:8px; justify-content:flex-end;"><button class="btn btn-ghost" id="__dlgCancel">Cancelar</button><button class="btn btn-primary" id="__dlgYes">Confirmar</button></div>`);
+  document.getElementById('__dlgCancel').addEventListener('click', ()=> overlay.remove());
+  document.getElementById('__dlgYes').addEventListener('click', ()=>{ overlay.remove(); onYes(); });
+}
+function showPrompt(message, defaultValue, onSubmit){
+  const overlay = dialogOverlay(`<p style="margin:0 0 10px; font-size:14px; line-height:1.5;">${message}</p><input id="__dlgInput" value="${(defaultValue||'').replace(/"/g,'"')}" style="width:100%; margin-bottom:16px; background:var(--surface-2); border:1px solid var(--line); border-radius:8px; color:var(--text); padding:9px 10px; font-family:'Inter',sans-serif; font-size:14px;"><div style="display:flex; gap:8px; justify-content:flex-end;"><button class="btn btn-ghost" id="__dlgCancel">Cancelar</button><button class="btn btn-primary" id="__dlgOk">OK</button></div>`);
+  const input = document.getElementById('__dlgInput');
+  input.focus(); input.select();
+  input.addEventListener('keydown', (ev)=>{ if(ev.key==='Enter'){ document.getElementById('__dlgOk').click(); } });
+  document.getElementById('__dlgCancel').addEventListener('click', ()=> overlay.remove());
+  document.getElementById('__dlgOk').addEventListener('click', ()=>{ const val = input.value; overlay.remove(); onSubmit(val); });
+}
+function uid(){ return Math.random().toString(36).slice(2,9); }
+
+async function hashPassword(pw){
+  if(window.crypto && window.crypto.subtle){
+    try{
+      const enc = new TextEncoder().encode(pw);
+      const buf = await window.crypto.subtle.digest('SHA-256', enc);
+      return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+    }catch(e){}
+  }
+  let hash = 0;
+  for(let i=0;i<pw.length;i++){ hash = (hash*31 + pw.charCodeAt(i)) | 0; }
+  return 'fallback:' + hash;
+}
+
+let fluxoEscopo = 'todas';
+let fluxoTitular = 'todos';
+let txMesFatura = 'todos';
+const SEM_TITULAR = '__sem__';
+
+function accountTipo(a){ return a.tipo || 'PF'; }
+function accountTipoLabel(t){ return t==='PJ' ? 'PJ' : 'PF'; }
+function accountTitulares(a){
+  if(!a.titular) return [];
+  return a.titular.split(/,| e /i).map(t=>t.trim()).filter(Boolean);
+}
+function titularesDisponiveis(){
+  const set = new Set();
+  (state.accounts||[]).filter(a=>fluxoEscopo==='todas' || accountTipo(a)===fluxoEscopo).forEach(a=>accountTitulares(a).forEach(t=>set.add(t)));
+  [...(state.cards||[]),...(state.investments||[]),...(state.goals||[]),...(state.boards||[]).flatMap(b=>b.items)].forEach(i=>{ const tp=itemTipo(i); if(fluxoEscopo!=='todas' && tp!==fluxoEscopo) return; itemTitulares(i).forEach(t=>set.add(t)); });
+  (state.cashFlowEntries||[]).forEach(e=>{ const tp=entradaTipoPessoa(e); if(fluxoEscopo!=='todas' && tp!==fluxoEscopo) return; entradaTitulares(e).forEach(t=>set.add(t)); });
+  return Array.from(set).sort((a,b)=>a.localeCompare(b,'pt-BR'));
+}
+function contaPassaFiltro(a){
+  if(fluxoEscopo!=='todas' && accountTipo(a)!==fluxoEscopo) return false;
+  if(fluxoTitular!=='todos' && !accountTitulares(a).includes(fluxoTitular)) return false;
+  return true;
+}
+function contasNoEscopo(){ if(!state.accounts) return []; return state.accounts.filter(contaPassaFiltro); }
+function camposTitularHTML(item, prefixo){
+  const t = item ? (item.titular||'') : '';
+  const tp = item ? (item.tipo||'') : '';
+  const sugestoes = titularesTodos();
+  return `<div><label>Titular</label><input id="${prefixo}-titular" list="titulares-datalist" placeholder="Ex: Pedro" value="${t.replace(/"/g,'"')}"></div><div><label>Tipo</label><select id="${prefixo}-tipo"><option value="" ${!tp?'selected':''}>— herdar da conta —</option><option value="PF" ${tp==='PF'?'selected':''}>Pessoa Física (PF)</option><option value="PJ" ${tp==='PJ'?'selected':''}>Pessoa Jurídica (PJ)</option></select></div><datalist id="titulares-datalist">${sugestoes.map(s=>`<option value="${s}">`).join('')}</datalist>`;
+}
+function titularesTodos(){
+  const set = new Set();
+  (state.accounts||[]).forEach(a=>accountTitulares(a).forEach(t=>set.add(t)));
+  [...(state.cards||[]),...(state.investments||[]),...(state.goals||[]),...(state.boards||[]).flatMap(b=>b.items),...(state.cashFlowEntries||[])].forEach(i=>{ if(i.titular) i.titular.split(/,| e /i).map(x=>x.trim()).filter(Boolean).forEach(t=>set.add(t)); });
+  return Array.from(set).sort((a,b)=>a.localeCompare(b,'pt-BR'));
+}
+function itemTitularLabel(item){
+  if(item.titular && item.titular.trim()) return item.titular.trim();
+  if(!item.accountId) return null;
+  const acc = state.accounts.find(a=>a.id===item.accountId);
+  return acc && acc.titular ? acc.titular.trim() : null;
+}
+function itemTipo(item){
+  if(item.tipo) return item.tipo;
+  if(!item.accountId) return null;
+  const acc = state.accounts.find(a=>a.id===item.accountId);
+  return acc ? accountTipo(acc) : null;
+}
+function itemTitulares(item){
+  const label = itemTitularLabel(item);
+  if(!label) return [];
+  return label.split(/,| e /i).map(t=>t.trim()).filter(Boolean);
+}
+function itemNoEscopo(item){
+  if(fluxoEscopo==='todas' && fluxoTitular==='todos') return true;
+  const titulares = itemTitulares(item);
+  const tipo = itemTipo(item);
+  if(titulares.length===0) return fluxoTitular === SEM_TITULAR;
+  if(fluxoTitular === SEM_TITULAR) return false;
+  if(fluxoEscopo!=='todas' && tipo!==fluxoEscopo) return false;
+  if(fluxoTitular!=='todos' && !titulares.includes(fluxoTitular)) return false;
+  return true;
+}
+function itemSemConta(item){ return !itemTitularLabel(item); }
+function cartoesNoEscopo(){ return state.cards.filter(itemNoEscopo); }
+function metasNoEscopo(){ return (state.goals||[]).filter(itemNoEscopo); }
+function investimentosNoEscopo(){ return state.investments.filter(itemNoEscopo); }
+function itensBoardsNoEscopo(){ return state.boards.flatMap(b=>b.items).filter(itemNoEscopo); }
+function entradaTitularLabel(e){
+  if(e.titular && e.titular.trim()) return e.titular.trim();
+  if(!e.accountId) return null;
+  const acc = state.accounts.find(a=>a.id===e.accountId);
+  return acc && acc.titular ? acc.titular.trim() : null;
+}
+function entradaTipoPessoa(e){
+  if(e.tipoPessoa) return e.tipoPessoa;
+  if(!e.accountId) return null;
+  const acc = state.accounts.find(a=>a.id===e.accountId);
+  return acc ? accountTipo(acc) : null;
+}
+function entradaTitulares(e){
+  const label = entradaTitularLabel(e);
+  if(!label) return [];
+  return label.split(/,| e /i).map(t=>t.trim()).filter(Boolean);
+}
+function entradaNoEscopo(e){
+  if(fluxoEscopo==='todas' && fluxoTitular==='todos') return true;
+  const titulares = entradaTitulares(e);
+  const tipo = entradaTipoPessoa(e);
+  if(titulares.length===0) return fluxoTitular === SEM_TITULAR;
+  if(fluxoTitular === SEM_TITULAR) return false;
+  if(fluxoEscopo!=='todas' && tipo!==fluxoEscopo) return false;
+  if(fluxoTitular!=='todos' && !titulares.includes(fluxoTitular)) return false;
+  return true;
+}
+function getSaldoInicialEfetivo(){
+  if(state.accounts && state.accounts.length>0){ return contasNoEscopo().reduce((s,a)=>s+(a.saldoAtual||0),0); }
+  return (fluxoEscopo==='todas' && fluxoTitular==='todos') ? state.saldoInicial : 0;
+}
+
+const VALID_ACTIVATION_CODES = ['GF-0HXD2','GF-0I1UO','GF-13SBF','GF-1ISCM','GF-1WC47','GF-35LGE','GF-3V8G8','GF-7RNJ6','GF-81T0Z','GF-83X70','GF-90GK6','GF-AAIK7','GF-AIZIW','GF-BPY9Y','GF-CF7Y1','GF-DA5PU','GF-DZP2W','GF-EBVCO','GF-HD7I3','GF-I04DJ','GF-IFCKP','GF-MYX19','GF-OAWFT','GF-Q6SG2','GF-R41A9','GF-TXGR3','GF-W6SFO','GF-WDQWL','GF-YB9EI','GF-Z1ZIN'];
+
+function showLockScreen(){
+  document.getElementById('lockScreenOverlay').style.display = 'flex';
+  setTimeout(()=> document.getElementById('lockPasswordInput').focus(), 50);
+}
+async function attemptUnlock(){
+  const input = document.getElementById('lockPasswordInput');
+  const errEl = document.getElementById('lockErrorMsg');
+  const hash = await hashPassword(input.value);
+  if(hash === state.security.passwordHash){
+    document.getElementById('lockScreenOverlay').style.display = 'none';
+    applyTheme(state.theme); render();
+  } else {
+    errEl.textContent = 'Senha incorreta. Tente novamente.';
+    input.value = ''; input.focus();
+  }
+}
+function hasClaudeStorage(){ return typeof window.storage !== 'undefined' && window.storage && typeof window.storage.get === 'function'; }
+function applyTheme(theme){
+  const t = Object.assign({}, DEFAULT_THEME, theme || {});
+  document.documentElement.style.setProperty('--bg', t.bg);
+  document.documentElement.style.setProperty('--surface', t.surface);
+  document.documentElement.style.setProperty('--mint', t.mint);
+  document.documentElement.style.setProperty('--amber', t.amber);
+  document.documentElement.style.setProperty('--coral', t.coral);
+  document.documentElement.style.setProperty('--text', t.text);
+}
+
+async function load(){
+  try{
+    let rawSaved = null;
+    if(hasClaudeStorage()){
+      const res = await window.storage.get(STORAGE_KEY);
+      if(res && res.value){ rawSaved = res.value; state = Object.assign(state, JSON.parse(res.value)); }
+    } else {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if(raw){ rawSaved = raw; state = Object.assign(state, JSON.parse(raw)); }
+    }
+    if(!state.categories || state.categories.length===0) state.categories = [...DEFAULT_CATEGORIES];
+    if(!state.theme) state.theme = { ...DEFAULT_THEME };
+    if(!state.boards){ state.boards = [{ id:'financiamentos', nome:'Financiamentos', items: state.financings || [] }]; }
+    delete state.financings;
+    if(typeof state.saldoInicial !== 'number') state.saldoInicial = 0;
+    if(!state.cashFlowEntries) state.cashFlowEntries = [];
+    if(!state.autoPaidMap) state.autoPaidMap = {};
+    if(!state.security) state.security = { passwordHash: null };
+    if(!state.navOrder) state.navOrder = ['resumo','cards','fluxo','investimentos','metas','contas', ...state.boards.map(b=>b.id)];
+    ['resumo','cards','fluxo','investimentos','metas','contas'].forEach(k=>{ if(!state.navOrder.includes(k)) state.navOrder.push(k); });
+    state.boards.forEach(b=>{ if(!state.navOrder.includes(b.id)) state.navOrder.push(b.id); });
+    const validKeys = new Set(['resumo','cards','fluxo','investimentos','metas','contas', ...state.boards.map(b=>b.id)]);
+    state.navOrder = state.navOrder.filter(k=>validKeys.has(k));
+    if(!state.fluxoBlockOrder) state.fluxoBlockOrder = [...DEFAULT_FLUXO_BLOCK_ORDER];
+    if(!state.investments) state.investments = [];
+    if(!state.goals) state.goals = [];
+    if(!state.accounts) state.accounts = [];
+    if(!state.transfers) state.transfers = [];
+    state.accounts.forEach(a=>{ if(a.tipo==='CJ') a.tipo='PF'; });
+    if(!state.budgets) state.budgets = {};
+    if(!state.contaLimite) state.contaLimite = { limite: 0, taxaJurosMensal: 0 };
+    if(typeof state.activated !== 'boolean') state.activated = false;
+    { const validBlocks = new Set(Object.keys(FLUXO_BLOCK_DEFS));
+      state.fluxoBlockOrder = state.fluxoBlockOrder.filter(k=>validBlocks.has(k));
+      Object.keys(FLUXO_BLOCK_DEFS).forEach(k=>{ if(!state.fluxoBlockOrder.includes(k)) state.fluxoBlockOrder.push(k); }); }
+    if(state.appVersion !== APP_VERSION){
+      if(rawSaved){ await pushBackup('Antes de atualizar para v'+APP_VERSION, rawSaved); }
+      state.appVersion = APP_VERSION;
+      await save();
+    }
+  }catch(e){}
+  if(!state.activated){ showActivationScreen(); }
+  else if(state.security && state.security.passwordHash){ showLockScreen(); }
+  else { applyTheme(state.theme); render(); }
+}
+
+function showActivationScreen(){
+  document.getElementById('activationOverlay').style.display = 'flex';
+  setTimeout(()=> document.getElementById('activationCodeInput').focus(), 50);
+}
+function attemptActivation(){
+  const input = document.getElementById('activationCodeInput');
+  const errEl = document.getElementById('activationErrorMsg');
+  const entered = input.value.trim().toUpperCase();
+  const valid = VALID_ACTIVATION_CODES.some(c => c.toUpperCase() === entered);
+  if(valid){
+    state.activated = true; state.activationCodeUsed = entered; save();
+    document.getElementById('activationOverlay').style.display = 'none';
+    if(state.security && state.security.passwordHash){ showLockScreen(); }
+    else { showCreatePasswordScreen(); }
+  } else {
+    errEl.textContent = 'Chave inválida. Confira com quem vendeu o acesso.';
+    input.value = ''; input.focus();
+  }
+}
+function showCreatePasswordScreen(){
+  document.getElementById('createPasswordOverlay').style.display = 'flex';
+  document.getElementById('createPw1').value = '';
+  document.getElementById('createPw2').value = '';
+  document.getElementById('createPwError').textContent = '';
+  setTimeout(()=> document.getElementById('createPw1').focus(), 50);
+}
+async function confirmCreatePassword(){
+  const pw1 = document.getElementById('createPw1').value;
+  const pw2 = document.getElementById('createPw2').value;
+  const errEl = document.getElementById('createPwError');
+  if(!pw1 || pw1.length < 4){ errEl.textContent = 'A senha precisa ter pelo menos 4 caracteres.'; return; }
+  if(pw1 !== pw2){ errEl.textContent = 'As senhas não coincidem.'; return; }
+  state.security = { passwordHash: await hashPassword(pw1) };
+  save();
+  document.getElementById('createPasswordOverlay').style.display = 'none';
+  applyTheme(state.theme); render();
+}
+async function save(){
+  state.lastUpdated = new Date().toISOString();
+  maybeAutoBackup();
+  try{
+    if(hasClaudeStorage()){ await window.storage.set(STORAGE_KEY, JSON.stringify(state)); }
+    else { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+  }catch(e){ console.error('storage error', e); }
+  renderLastUpdated();
+}
+
+async function loadBackups(){
+  try{
+    if(hasClaudeStorage()){ const res = await window.storage.get(BACKUPS_KEY); if(res && res.value) return JSON.parse(res.value); }
+    else { const raw = localStorage.getItem(BACKUPS_KEY); if(raw) return JSON.parse(raw); }
+  }catch(e){}
+  return [];
+}
+async function saveBackups(arr){
+  try{
+    const payload = JSON.stringify(arr);
+    if(hasClaudeStorage()) await window.storage.set(BACKUPS_KEY, payload);
+    else localStorage.setItem(BACKUPS_KEY, payload);
+  }catch(e){ console.error('backup store error', e); }
+}
+async function pushBackup(motivo, snapshotJson){
+  try{
+    const data = snapshotJson || JSON.stringify(state);
+    const arr = await loadBackups();
+    arr.unshift({ id: uid(), ts: new Date().toISOString(), motivo: motivo||'Backup', size: data.length, data });
+    while(arr.length > MAX_BACKUPS) arr.pop();
+    await saveBackups(arr);
+    return true;
+  }catch(e){ return false; }
+}
+async function maybeAutoBackup(){
+  const hoje = todayStr();
+  if(state.lastAutoBackupDate === hoje) return;
+  state.lastAutoBackupDate = hoje;
+  await pushBackup('Backup automático diário');
+}
+function hydrateFromParsed(parsed){
+  state = Object.assign({ cards:[],transactions:[],selectedCard:null,categories:[...DEFAULT_CATEGORIES],theme:{...DEFAULT_THEME},boards:[{id:'financiamentos',nome:'Financiamentos',items:[]}],saldoInicial:0,cashFlowEntries:[],transfers:[],autoPaidMap:{},security:{passwordHash:null},navOrder:null,activated:true }, parsed);
+  state.activated = true;
+  if(parsed.financings && !parsed.boards){ state.boards = [{id:'financiamentos',nome:'Financiamentos',items:parsed.financings}]; }
+  delete state.financings;
+  if(!state.boards || !state.boards.length) state.boards = [{id:'financiamentos',nome:'Financiamentos',items:[]}];
+  if(!state.navOrder) state.navOrder = ['resumo','cards','fluxo','investimentos','metas','contas',...state.boards.map(b=>b.id)];
+  ['resumo','cards','fluxo','investimentos','metas','contas'].forEach(k=>{ if(!state.navOrder.includes(k)) state.navOrder.push(k); });
+  state.boards.forEach(b=>{ if(!state.navOrder.includes(b.id)) state.navOrder.push(b.id); });
+  { const validKeys = new Set(['resumo','cards','fluxo','investimentos','metas','contas',...state.boards.map(b=>b.id)]); state.navOrder = state.navOrder.filter(k=>validKeys.has(k)); }
+  if(!state.fluxoBlockOrder) state.fluxoBlockOrder = [...DEFAULT_FLUXO_BLOCK_ORDER];
+  if(!state.investments) state.investments = [];
+  if(!state.goals) state.goals = [];
+  if(!state.accounts) state.accounts = [];
+  if(!state.transfers) state.transfers = [];
+  state.accounts.forEach(a=>{ if(a.tipo==='CJ') a.tipo='PF'; });
+  if(!state.budgets) state.budgets = {};
+  if(!state.contaLimite) state.contaLimite = {limite:0,taxaJurosMensal:0};
+  { const validBlocks = new Set(Object.keys(FLUXO_BLOCK_DEFS)); state.fluxoBlockOrder = state.fluxoBlockOrder.filter(k=>validBlocks.has(k)); Object.keys(FLUXO_BLOCK_DEFS).forEach(k=>{ if(!state.fluxoBlockOrder.includes(k)) state.fluxoBlockOrder.push(k); }); }
+}
+
+function renderLastUpdated(){
+  const el = document.getElementById('lastUpdatedLabel');
+  if(!el) return;
+  if(!state.lastUpdated){ el.textContent = ''; return; }
+  const d = new Date(state.lastUpdated);
+  el.textContent = 'salvo: '+d.toLocaleDateString('pt-BR')+' '+d.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+}
+
+function txTipo(t){
+  if(t.tipo) return t.tipo;
+  const total = t.parcelasTotal || t.parcelas || 1;
+  return total>1 ? 'parcelado' : 'unica';
+}
+function cardSpent(cardId){
+  return state.transactions.filter(t=>t.cardId===cardId).reduce((s,t)=>{
+    const tipo = txTipo(t);
+    if(tipo !== 'parcelado') return s + t.valor;
+    const total = t.parcelasTotal || t.parcelas || 1;
+    const atual = t.parcelaAtual || 1;
+    const remaining = Math.max(1, total - atual + 1);
+    return s + (t.valor * remaining);
+  }, 0);
+}
+
+// ===== SIDEBAR NAVIGATION =====
+function renderSidebarNav(){
+  // Atualiza botões de view
+  document.querySelectorAll('[data-sidebar-view]').forEach(btn=>{
+    btn.classList.toggle('active', btn.dataset.sidebarView === appView);
+  });
+  // Tabelas personalizadas
+  const customNav = document.getElementById('sidebarCustomNav');
+  if(customNav){
+    customNav.innerHTML = '';
+    state.boards.forEach(b=>{
+      const btn = document.createElement('button');
+      btn.className = 'sidebar-nav-btn' + (appView===b.id ? ' active' : '');
+      btn.innerHTML = `<span class="nav-icon">◫</span>${b.nome}`;
+      btn.addEventListener('click', ()=>{ appView = b.id; applyAppView(); });
+      customNav.appendChild(btn);
+    });
+  }
+  // Seletor de escopo
+  document.querySelectorAll('[data-sidebar-scope]').forEach(btn=>{
+    btn.classList.toggle('active', btn.dataset.sidebarScope === fluxoEscopo);
+  });
+}
+
+function render(){
+  renderFiltrosEscopo();
+  renderSummary();
+  renderCards();
+  renderTxPanel();
+  renderCategoryBars();
+  renderMonthChart();
+  renderCardTotals();
+  renderResumoGeral();
+  renderResumoBoards();
+  renderAppNav();
+  renderSidebarNav();
+  applyAppView();
+  renderLastUpdated();
+}
+
+let appView = 'resumo';
+function applyAppView(){
+  document.getElementById('resumoAppSection').style.display = appView==='resumo' ? 'block' : 'none';
+  document.getElementById('cardsAppSection').style.display = appView==='cards' ? 'block' : 'none';
+  document.getElementById('fluxoAppSection').style.display = appView==='fluxo' ? 'block' : 'none';
+  document.getElementById('investAppSection').style.display = appView==='investimentos' ? 'block' : 'none';
+  document.getElementById('goalsAppSection').style.display = appView==='metas' ? 'block' : 'none';
+  document.getElementById('accountsAppSection').style.display = appView==='contas' ? 'block' : 'none';
+  const isBoard = !!boardById(appView);
+  document.getElementById('boardAppSection').style.display = isBoard ? 'block' : 'none';
+  renderSidebarNav();
+  renderAppNav();
+  if(isBoard) renderBoardSection();
+  if(appView==='fluxo') renderFluxoCaixa();
+  if(appView==='investimentos') renderInvestSection();
+  if(appView==='metas') renderGoalsSection();
+  if(appView==='contas') renderAccountsSection();
+}
+
+// Sidebar button events
+document.querySelectorAll('[data-sidebar-view]').forEach(btn=>{
+  btn.addEventListener('click', ()=>{ appView = btn.dataset.sidebarView; applyAppView(); });
+});
+document.querySelectorAll('[data-sidebar-scope]').forEach(btn=>{
+  btn.addEventListener('click', ()=>{ fluxoEscopo = btn.dataset.sidebarScope; render(); });
+});
+document.getElementById('sidebarReport').addEventListener('click', buildAndPrintReport);
+document.getElementById('sidebarSettings').addEventListener('click', ()=>{
+  const panel = document.getElementById('sidebarConfigPanel');
+  panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+  document.getElementById('sidebarMenuPanel').style.display = 'none';
+});
+document.getElementById('sidebarConfigClose').addEventListener('click', ()=>{
+  document.getElementById('sidebarConfigPanel').style.display = 'none';
+});
+document.getElementById('sidebarAddBoard').addEventListener('click', ()=>{
+  document.getElementById('sidebarMenuPanel').style.display = 'block';
+  document.getElementById('sidebarConfigPanel').style.display = 'none';
+  addNewBoard();
+});
+document.getElementById('sidebarMenuClose').addEventListener('click', ()=>{
+  document.getElementById('sidebarMenuPanel').style.display = 'none';
+});
+
+// ===== BOTÃO SAIR NA SIDEBAR =====
+document.getElementById('sidebarLogout').addEventListener('click', logout);
+
+function buildCardTotalsHTML(){
+  const cardsF = cartoesNoEscopo();
+  if(cardsF.length===0) return '<div class="empty">Nenhum cartão neste filtro.</div>';
+  let rows = cardsF.map((c,i)=>{
+    const spent = cardSpent(c.id);
+    const disponivel = c.limite - spent;
+    const pct = c.limite>0 ? Math.min(100, spent/c.limite*100) : 0;
+    const color = CHART_COLORS[i % CHART_COLORS.length];
+    return `<tr><td><span style="display:inline-block;width:9px;height:9px;border-radius:3px;background:${color};margin-right:8px;"></span>${c.nome}</td><td class="val-cell">${fmt(spent)}</td><td class="val-cell">${fmt(c.limite)}</td><td class="val-cell" style="color:${disponivel<0?'var(--coral)':'var(--text)'}">${fmt(disponivel)}</td><td class="val-cell mono" style="color:${pct>85?'var(--coral)':pct>60?'var(--amber)':'var(--mint)'}">${pct.toFixed(0)}%</td></tr>`;
+  }).join('');
+  return `<table><thead><tr><th>Cartão</th><th style="text-align:right;">Gasto</th><th style="text-align:right;">Limite</th><th style="text-align:right;">Disponível</th><th style="text-align:right;">Uso</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+function renderCardTotals(){
+  const wrap = document.getElementById('cardTotalsTable'); if(wrap) wrap.innerHTML = buildCardTotalsHTML();
+  const resumoWrap = document.getElementById('resumoCardTotalsTable'); if(resumoWrap) resumoWrap.innerHTML = buildCardTotalsHTML();
+}
+function renderSummary(){
+  const cardsF = cartoesNoEscopo();
+  const totalLimite = cardsF.reduce((s,c)=>s+c.limite,0);
+  const totalGasto = cardsF.reduce((s,c)=> s + cardSpent(c.id), 0);
+  const disponivel = totalLimite - totalGasto;
+  const pct = totalLimite>0 ? (totalGasto/totalLimite*100) : 0;
+  const el = document.getElementById('summaryStrip');
+  el.innerHTML = `<div class="summary-item"><div class="eyebrow">Limite total</div><div class="val">${fmt(totalLimite)}</div></div><div class="summary-item ${pct>85?'danger':pct>60?'warn':'ok'}"><div class="eyebrow">Gasto total</div><div class="val">${fmt(totalGasto)}</div></div><div class="summary-item ok"><div class="eyebrow">Disponível</div><div class="val">${fmt(disponivel)}</div></div><div class="summary-item"><div class="eyebrow">Cartões cadastrados</div><div class="val">${cardsF.length}</div></div>`;
+}
+function renderResumoGeral(){
+  const wrap = document.getElementById('resumoSummaryStrip'); if(!wrap) return;
+  const cardsF = cartoesNoEscopo();
+  const itensF = itensBoardsNoEscopo();
+  const contasF = contasNoEscopo();
+  const investF = investimentosNoEscopo();
+  const totalLimite = cardsF.reduce((s,c)=>s+c.limite,0);
+  const totalGastoCartoes = cardsF.reduce((s,c)=> s + cardSpent(c.id), 0);
+  const totalParcelaBoards = itensF.reduce((s,it)=> s + it.parcelaValor, 0);
+  const totalSaldoBoards = itensF.reduce((s,it)=> s + boardItemRemaining(it), 0);
+  const totalSaldoContas = contasF.reduce((s,a)=>s+(a.saldoAtual||0),0);
+  const totalInvestido = investF.reduce((s,i)=>s+(i.valorAtual||0), 0);
+  const disponivelCartoes = totalLimite - totalGastoCartoes;
+  wrap.innerHTML = `<div class="summary-item ${totalSaldoContas>=0?'ok':'danger'}"><div class="eyebrow">Saldo atual (todas as contas)</div><div class="val">${totalSaldoContas<0?'-':''}${fmt(Math.abs(totalSaldoContas))}</div><div class="sub">Em aplicações<div class="sub-val" style="color:var(--mint);">${fmt(totalInvestido)}</div></div></div><div class="summary-item"><div class="eyebrow">Limite total (cartões)</div><div class="val">${fmt(totalLimite)}</div><div class="sub">Comprometido<div class="sub-val" style="color:var(--amber);">${fmt(totalGastoCartoes)}</div></div></div><div class="summary-item"><div class="eyebrow">Disponível em cartões</div><div class="val" style="color:${disponivelCartoes<0?'var(--coral)':'var(--mint)'};">${disponivelCartoes<0?'-':''}${fmt(Math.abs(disponivelCartoes))}</div></div><div class="summary-item"><div class="eyebrow">Financiamentos — parcela mensal</div><div class="val" style="color:var(--amber);">${fmt(totalParcelaBoards)}</div><div class="sub">Saldo devedor total<div class="sub-val">${fmt(totalSaldoBoards)}</div></div></div>`;
+  renderResumoLimiteBars();
+  renderResumoComposicaoChart(totalGastoCartoes, totalSaldoBoards);
+  renderProximosVencimentos();
+  renderFaturasCartao();
+  renderDRE();
+  renderSimuladorQuitacao();
+}
+
+function imprimirDocumento(titulo, subtitulo, corpoHtml){
+  const agora = new Date();
+  document.getElementById('printReportArea').innerHTML = `<h1>${titulo}</h1><div class="pr-meta">${subtitulo} · gerado em ${agora.toLocaleDateString('pt-BR')} às ${agora.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})}</div>${corpoHtml}`;
+  window.print();
+}
+function imprimirFatura(){
+  const card = state.cards.find(c=>c.id===state.selectedCard);
+  if(!card){ showAlert('Selecione um cartão primeiro.'); return; }
+  const linhas = []; let total = 0;
+  const addLinha = (t, parcelaNoMes)=>{
+    const tipo = txTipo(t); const totalP = t.parcelasTotal || t.parcelas || 1; const atual = parcelaNoMes || t.parcelaAtual || 1;
+    const parc = tipo==='parcelado' ? atual+'/'+totalP : (tipo==='recorrente' ? 'recorrente' : '-');
+    total += t.valor;
+    linhas.push(`<tr><td>${t.data.split('-').reverse().join('/')}</td><td>${t.fornecedor||'-'}</td><td>${t.descricao}</td><td>${t.categoria||'-'}</td><td>${parc}</td><td class="pr-right">${fmt(t.valor)}</td></tr>`);
+  };
+  const todas = state.transactions.filter(t=>t.cardId===card.id);
+  let subtitulo;
+  if(txMesFatura==='todos'){ subtitulo = card.nome+' · todos os lançamentos'; todas.sort((a,b)=>b.data.localeCompare(a.data)).forEach(t=>addLinha(t, null)); }
+  else {
+    const [fy,fm] = txMesFatura.split('-');
+    subtitulo = card.nome+' · fatura de '+MONTH_NAMES[parseInt(fm,10)-1]+'/'+fy+' (fecha dia '+card.fechamento+' · vence dia '+card.vencimento+')';
+    todas.forEach(t=>{
+      const tipo = txTipo(t); const primeira = faturaMesDaCompra(card, t.data);
+      if(primeira === txMesFatura){ addLinha(t, t.parcelaAtual||1); return; }
+      let remaining = 0;
+      if(tipo==='parcelado') remaining = (t.parcelasTotal||1) - (t.parcelaAtual||1);
+      else if(tipo==='recorrente') remaining = t.mesesProjecao || 12;
+      for(let i=1;i<=remaining;i++){ if(addMonthsKey(primeira+'-01', i) === txMesFatura){ addLinha(t, (t.parcelaAtual||1)+i); break; } }
+    });
+  }
+  const titularTxt = itemTitularLabel(card) ? ' · Titular: '+itemTitularLabel(card) : '';
+  const corpo = `<h2>Lançamentos</h2><table><tr><th>Data</th><th>Fornecedor</th><th>Descrição</th><th>Categoria</th><th>Parcela</th><th class="pr-right">Valor</th></tr>${linhas.join('')||'<tr><td colspan="6" class="pr-muted">Nenhum lançamento nesta fatura</td></tr>'}<tr class="pr-total"><td colspan="5">TOTAL</td><td class="pr-right">${fmt(total)}</td></tr></table><h2>Dados do cartão</h2><table><tr><td>Limite total</td><td class="pr-right">${fmt(card.limite)}</td></tr><tr><td>Comprometido</td><td class="pr-right">${fmt(cardSpent(card.id))}</td></tr><tr><td>Disponível</td><td class="pr-right">${fmt(card.limite - cardSpent(card.id))}</td></tr></table>`;
+  imprimirDocumento('Fatura — '+card.nome, subtitulo+titularTxt, corpo);
+}
+function imprimirContas(){
+  const contasF = contasNoEscopo();
+  if(contasF.length===0){ showAlert('Nenhuma conta para imprimir neste filtro.'); return; }
+  const linhas = contasF.map(a=>`<tr><td>${a.nome}</td><td>${a.banco||'-'}</td><td>${accountTipoLabel(accountTipo(a))}</td><td>${a.titular||'-'}</td><td class="pr-right">${fmt(a.saldoAtual||0)}</td><td class="pr-right">${a.limiteChequeEspecial ? fmt(a.limiteChequeEspecial) : '-'}</td></tr>`).join('');
+  const total = contasF.reduce((s,a)=>s+(a.saldoAtual||0),0);
+  const corpo = `<h2>Contas</h2><table><tr><th>Conta</th><th>Banco</th><th>Tipo</th><th>Titular</th><th class="pr-right">Saldo atual</th><th class="pr-right">Cheque especial</th></tr>${linhas}<tr class="pr-total"><td colspan="4">SALDO TOTAL</td><td class="pr-right">${fmt(total)}</td><td></td></tr></table>`;
+  imprimirDocumento('Extrato de contas', descricaoFiltroAtual(), corpo);
+}
+function imprimirAplicacoes(){
+  const investF = investimentosNoEscopo();
+  if(investF.length===0){ showAlert('Nenhuma aplicação para imprimir neste filtro.'); return; }
+  const linhas = investF.map(i=>{ const ganho = investGanho(i); const pct = investGanhoPct(i); return `<tr><td>${i.nome}</td><td>${i.instituicao||'-'}</td><td>${itemTitularLabel(i)||'-'}</td><td class="pr-right">${fmt(i.saldoInicial||0)}</td><td class="pr-right">${fmt(i.valorAtual||0)}</td><td class="pr-right">${ganho>=0?'+':''}${fmt(ganho)} (${pct.toFixed(1)}%)</td></tr>`; }).join('');
+  const totIni = investF.reduce((s,i)=>s+(i.saldoInicial||0),0);
+  const totAtual = investF.reduce((s,i)=>s+(i.valorAtual||0),0);
+  const corpo = `<h2>Aplicações</h2><table><tr><th>Aplicação</th><th>Instituição</th><th>Titular</th><th class="pr-right">Saldo inicial</th><th class="pr-right">Valor atual</th><th class="pr-right">Rendimento</th></tr>${linhas}<tr class="pr-total"><td colspan="3">TOTAL</td><td class="pr-right">${fmt(totIni)}</td><td class="pr-right">${fmt(totAtual)}</td><td class="pr-right">${totAtual-totIni>=0?'+':''}${fmt(totAtual-totIni)}</td></tr></table>`;
+  imprimirDocumento('Posição de aplicações', descricaoFiltroAtual(), corpo);
+}
+function descricaoFiltroAtual(){
+  const partes = [];
+  if(fluxoEscopo!=='todas') partes.push(fluxoEscopo==='PJ'?'Pessoa Jurídica':'Pessoa Física');
+  if(fluxoTitular!=='todos' && fluxoTitular!==SEM_TITULAR) partes.push('Titular: '+fluxoTitular);
+  return partes.length ? partes.join(' · ') : 'Todos os registros';
+}
+
+function buildAndPrintReport(){
+  const monthKey = todayStr().slice(0,7);
+  const entries = buildFluxoEntries(monthKey);
+  const receitas = entries.filter(e=>e.tipo==='receita').reduce((s,e)=>s+e.valor,0);
+  const despesas = entries.filter(e=>e.tipo==='despesa');
+  const totalDespesas = despesas.reduce((s,e)=>s+e.valor,0);
+  const cartaoTotal = despesas.filter(e=>e.autoType==='card').reduce((s,e)=>s+e.valor,0);
+  const boardsTotal = despesas.filter(e=>e.autoType==='board').reduce((s,e)=>s+e.valor,0);
+  const fixoTotal = despesas.filter(e=>e.natureza==='fixo').reduce((s,e)=>s+e.valor,0);
+  const variavelTotal = despesas.filter(e=>e.natureza==='variavel').reduce((s,e)=>s+e.valor,0);
+  const outrasTotal = despesas.filter(e=>!e.auto && !e.natureza).reduce((s,e)=>s+e.valor,0);
+  const resultado = receitas - totalDespesas;
+  const [y,m] = monthKey.split('-');
+  const mesLabel = MONTH_NAMES[parseInt(m,10)-1]+' de '+y;
+  const totalLimite = cartoesNoEscopo().reduce((s,c)=>s+c.limite,0);
+  const totalGastoCartoes = cartoesNoEscopo().reduce((s,c)=> s + cardSpent(c.id), 0);
+  const totalSaldoBoards = itensBoardsNoEscopo().reduce((s,it)=> s + boardItemRemaining(it), 0);
+  const totalInvestido = investimentosNoEscopo().reduce((s,i)=>s+(i.valorAtual||0), 0);
+  const cardsRows = cartoesNoEscopo().map(c=>{ const spent = cardSpent(c.id); const disp = c.limite - spent; return `<tr><td>${c.nome}</td><td class="pr-right">${fmt(c.limite)}</td><td class="pr-right">${fmt(spent)}</td><td class="pr-right">${fmt(disp)}</td></tr>`; }).join('') || '<tr><td colspan="4" class="pr-muted">Nenhum cartão cadastrado</td></tr>';
+  const boardsRows = state.boards.flatMap(b=>b.items.filter(itemNoEscopo).map(it=>{ const saldo = boardItemRemaining(it); return `<tr><td>${b.nome} — ${it.nome}</td><td class="pr-right">${fmt(it.parcelaValor)}</td><td>${it.parcelaAtual}/${it.parcelasTotal}</td><td class="pr-right">${fmt(saldo)}</td></tr>`; })).join('') || '<tr><td colspan="4" class="pr-muted">Nenhum item cadastrado</td></tr>';
+  const hoje = new Date(); const hojeMidnight = new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate());
+  const vencResults = [];
+  [monthKey, addMonthsKey(monthKey+'-01',1)].forEach(mk=>{ const [yy,mm] = mk.split('-'); buildFluxoEntries(mk).filter(e=>e.tipo==='despesa' && !e.pago).forEach(e=>{ const dateObj = new Date(parseInt(yy,10), parseInt(mm,10)-1, e.dia); const diffDays = Math.round((dateObj - hojeMidnight)/8640000); if(diffDays>=0 && diffDays<=15){ vencResults.push({descricao:e.descricao, dias:diffDays, valor:e.valor}); } }); });
+  vencResults.sort((a,b)=>a.dias-b.dias);
+  const vencRows = vencResults.slice(0,12).map(r=>`<tr><td>${r.descricao}</td><td>Faltam ${r.dias} dias</td><td class="pr-right">${fmt(r.valor)}</td></tr>`).join('') || '<tr><td colspan="3" class="pr-muted">Nada vencendo nos próximos 15 dias</td></tr>';
+  const html = `<h1>Meu Fluxo Dia a Dia — Relatório Mensal</h1><div class="pr-meta">Referente a ${mesLabel} · gerado em ${new Date().toLocaleDateString('pt-BR')} às ${new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})}</div><h2>Resumo geral</h2><table><tr><td>Limite total (cartões)</td><td class="pr-right">${fmt(totalLimite)}</td></tr><tr><td>Comprometido em cartões</td><td class="pr-right">${fmt(totalGastoCartoes)}</td></tr><tr><td>Comprometido em financiamentos</td><td class="pr-right">${fmt(totalSaldoBoards)}</td></tr><tr><td>Total em aplicações</td><td class="pr-right">${fmt(totalInvestido)}</td></tr><tr class="pr-total"><td>Comprometido total (tudo)</td><td class="pr-right">${fmt(totalGastoCartoes+totalSaldoBoards)}</td></tr></table><h2>DRE simplificado — ${mesLabel}</h2><table><tr><td>(+) Receitas</td><td class="pr-right">${fmt(receitas)}</td></tr><tr><td class="pr-muted">  Cartões de crédito</td><td class="pr-right pr-muted">-${fmt(cartaoTotal)}</td></tr><tr><td class="pr-muted">  Financiamentos/tabelas</td><td class="pr-right pr-muted">-${fmt(boardsTotal)}</td></tr><tr><td class="pr-muted">  Despesas fixas</td><td class="pr-right pr-muted">-${fmt(fixoTotal)}</td></tr><tr><td class="pr-muted">  Despesas variáveis</td><td class="pr-right pr-muted">-${fmt(variavelTotal)}</td></tr><tr><td class="pr-muted">  Outras/não classificadas</td><td class="pr-right pr-muted">-${fmt(outrasTotal)}</td></tr><tr><td>(-) Total de despesas</td><td class="pr-right">-${fmt(totalDespesas)}</td></tr><tr class="pr-total"><td>(=) Resultado do mês</td><td class="pr-right">${resultado<0?'-':''}${fmt(Math.abs(resultado))}</td></tr></table><h2>Próximos vencimentos (15 dias)</h2><table><tr><th>Descrição</th><th>Vencimento</th><th class="pr-right">Valor</th></tr>${vencRows}</table><h2>Cartões de crédito</h2><table><tr><th>Cartão</th><th class="pr-right">Limite</th><th class="pr-right">Comprometido</th><th class="pr-right">Disponível</th></tr>${cardsRows}</table><h2>Financiamentos e outras tabelas</h2><table><tr><th>Item</th><th class="pr-right">Parcela</th><th>Progresso</th><th class="pr-right">Saldo devedor</th></tr>${boardsRows}</table>`;
+  document.getElementById('printReportArea').innerHTML = html;
+  window.print();
+}
+
+let simuladorAporteExtra = 0;
+function renderSimuladorQuitacao(){
+  const wrap = document.getElementById('resumoSimulador'); if(!wrap) return;
+  const totalGastoCartoes = cartoesNoEscopo().reduce((s,c)=> s + cardSpent(c.id), 0);
+  const totalSaldoBoards = itensBoardsNoEscopo().reduce((s,it)=> s + boardItemRemaining(it), 0);
+  const totalDivida = totalGastoCartoes + totalSaldoBoards;
+  const monthKey = todayStr().slice(0,7);
+  const parcelaCartoes = cartoesNoEscopo().reduce((s,c)=> s + computeCardMonthlyTotal(c.id, monthKey), 0);
+  const parcelaBoards = itensBoardsNoEscopo().reduce((s,it)=> s + it.parcelaValor, 0);
+  const totalParcelaMensal = parcelaCartoes + parcelaBoards;
+  if(totalDivida<=0){ wrap.innerHTML = '<div class="empty">Você não tem dívidas em aberto. 🎉</div>'; return; }
+  if(totalParcelaMensal<=0){ wrap.innerHTML = '<div class="empty">Não há parcela mensal comprometida para calcular o ritmo de quitação.</div>'; return; }
+  const mesesSemExtra = Math.ceil(totalDivida / totalParcelaMensal);
+  const mesesComExtra = Math.ceil(totalDivida / (totalParcelaMensal + simuladorAporteExtra));
+  function dataDaqui(meses){ const d = new Date(); d.setMonth(d.getMonth()+meses); return MONTH_NAMES[d.getMonth()]+'/'+d.getFullYear(); }
+  const economizados = mesesSemExtra - mesesComExtra;
+  wrap.innerHTML = `<div class="summary-strip" style="margin-bottom:0;"><div class="summary-item"><div class="eyebrow">Total devendo hoje</div><div class="val">${fmt(totalDivida)}</div></div><div class="summary-item"><div class="eyebrow">Comprometido por mês</div><div class="val">${fmt(totalParcelaMensal)}</div></div><div class="summary-item"><div class="eyebrow">Ritmo atual (sem extra)</div><div class="val">${mesesSemExtra} meses<br><span style="font-size:12px; opacity:.7;">até ${dataDaqui(mesesSemExtra)}</span></div></div><div class="summary-item ${simuladorAporteExtra>0?'ok':''}"><div class="eyebrow">Com o extra informado</div><div class="val">${mesesComExtra} meses<br><span style="font-size:12px; opacity:.7;">até ${dataDaqui(mesesComExtra)}</span></div></div></div>${simuladorAporteExtra>0 && economizados>0 ? `<div style="margin-top:14px; font-size:13.5px; color:var(--mint);">✓ Pagando ${fmt(simuladorAporteExtra)} a mais por mês, você quita tudo <strong>${economizados} ${economizados===1?'mês':'meses'} mais cedo</strong>.</div>` : ''}`;
+}
+function renderDRE(){
+  const wrap = document.getElementById('resumoDRE'); if(!wrap) return;
+  const monthKey = todayStr().slice(0,7);
+  const entries = buildFluxoEntries(monthKey);
+  const receitas = entries.filter(e=>e.tipo==='receita').reduce((s,e)=>s+e.valor,0);
+  const despesas = entries.filter(e=>e.tipo==='despesa');
+  const totalDespesas = despesas.reduce((s,e)=>s+e.valor,0);
+  const cartaoTotal = despesas.filter(e=>e.autoType==='card').reduce((s,e)=>s+e.valor,0);
+  const boardsTotal = despesas.filter(e=>e.autoType==='board').reduce((s,e)=>s+e.valor,0);
+  const fixoTotal = despesas.filter(e=>e.natureza==='fixo').reduce((s,e)=>s+e.valor,0);
+  const variavelTotal = despesas.filter(e=>e.natureza==='variavel').reduce((s,e)=>s+e.valor,0);
+  const outrasTotal = despesas.filter(e=>!e.auto && !e.natureza).reduce((s,e)=>s+e.valor,0);
+  const resultado = receitas - totalDespesas;
+  const [y,m] = monthKey.split('-');
+  const mesLabel = MONTH_NAMES[parseInt(m,10)-1]+'/'+y;
+  wrap.innerHTML = `<div style="font-size:12px; color:var(--text-muted); margin-bottom:12px;">Referente a ${mesLabel} · lançamentos já cadastrados no fluxo de caixa</div><table><tbody><tr><td style="font-weight:600;">(+) Receitas</td><td class="val-cell" style="color:var(--mint); font-weight:600;">${fmt(receitas)}</td></tr><tr><td style="padding-left:18px; color:var(--text-muted); font-size:13px;">Cartões de crédito</td><td class="val-cell" style="color:var(--text-muted); font-size:13px;">-${fmt(cartaoTotal)}</td></tr><tr><td style="padding-left:18px; color:var(--text-muted); font-size:13px;">Financiamentos/tabelas</td><td class="val-cell" style="color:var(--text-muted); font-size:13px;">-${fmt(boardsTotal)}</td></tr><tr><td style="padding-left:18px; color:var(--text-muted); font-size:13px;">Despesas fixas</td><td class="val-cell" style="color:var(--text-muted); font-size:13px;">-${fmt(fixoTotal)}</td></tr><tr><td style="padding-left:18px; color:var(--text-muted); font-size:13px;">Despesas variáveis</td><td class="val-cell" style="color:var(--text-muted); font-size:13px;">-${fmt(variavelTotal)}</td></tr><tr><td style="padding-left:18px; color:var(--text-muted); font-size:13px;">Outras / não classificadas</td><td class="val-cell" style="color:var(--text-muted); font-size:13px;">-${fmt(outrasTotal)}</td></tr><tr style="border-top:1px solid var(--line);"><td style="font-weight:600; padding-top:10px;">(-) Total de despesas</td><td class="val-cell" style="font-weight:600; padding-top:10px; color:var(--coral);">-${fmt(totalDespesas)}</td></tr><tr style="border-top:2px solid var(--line);"><td style="font-weight:700; padding-top:14px; font-size:15px;">(=) Resultado do mês</td><td class="val-cell" style="font-weight:700; padding-top:14px; font-size:15px; color:${resultado>=0?'var(--mint)':'var(--coral)'}">${resultado<0?'-':''}${fmt(Math.abs(resultado))}</td></tr></tbody></table>`;
+}
+
+let periodoAgenda = 15;
+function coletarAgenda(tipoLancamento){
+  const hoje = new Date(); const hojeMidnight = new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate());
+  const hojeKey = todayStr().slice(0,7);
+  const monthsToCheck = [hojeKey, addMonthsKey(hojeKey+'-01', 1), addMonthsKey(hojeKey+'-01', 2)];
+  const results = [];
+  let limiteDias, fimMes = null;
+  if(periodoAgenda === 'mes'){ const ultimoDia = new Date(hoje.getFullYear(), hoje.getMonth()+1, 0); fimMes = ultimoDia; limiteDias = Math.round((ultimoDia - hojeMidnight)/8640000); }
+  else { limiteDias = periodoAgenda; }
+  monthsToCheck.forEach(mk=>{
+    const [yy,mm] = mk.split('-');
+    buildFluxoEntries(mk).filter(e=>e.tipo===tipoLancamento && !e.pago).forEach(e=>{
+      const dateObj = new Date(parseInt(yy,10), parseInt(mm,10)-1, e.dia);
+      const diffDays = Math.round((dateObj - hojeMidnight)/8640000);
+      if(diffDays<0){ results.push({ descricao:e.descricao, categoria:e.categoria, dias:diffDays, valor:e.valor, data:dateObj }); return; }
+      if(periodoAgenda==='mes'){ if(dateObj > fimMes) return; } else if(diffDays > limiteDias) return;
+      results.push({ descricao:e.descricao, categoria:e.categoria, dias:diffDays, valor:e.valor, data:dateObj });
+    });
+  });
+  results.sort((a,b)=>a.dias-b.dias);
+  return results;
+}
+function labelPeriodo(){ if(periodoAgenda==='mes') return 'até o fim do mês'; return 'nos próximos '+periodoAgenda+' dias'; }
+function renderAgendaTabela(wrapId, tipoLancamento, verboFuturo){
+  const wrap = document.getElementById(wrapId); if(!wrap) return;
+  const results = coletarAgenda(tipoLancamento);
+  const total = results.reduce((s,r)=>s+r.valor,0);
+  if(results.length===0){ wrap.innerHTML = '<div class="empty">Nada '+verboFuturo+' '+labelPeriodo()+'. 🎉</div>'; return; }
+  const cor = tipoLancamento==='receita' ? 'var(--mint)' : 'var(--amber)';
+  const rows = results.slice(0,12).map(r=>{
+    const atrasado = r.dias<0; const urgente = r.dias<=3;
+    const label = atrasado ? `Atrasado ${Math.abs(r.dias)} ${Math.abs(r.dias)===1?'dia':'dias'}` : r.dias===0 ? 'Hoje' : r.dias===1 ? 'Amanhã' : `Faltam ${r.dias} dias`;
+    const dataTxt = String(r.data.getDate()).padStart(2,'0')+'/'+String(r.data.getMonth()+1).padStart(2,'0');
+    return `<tr><td>${r.descricao}</td><td style="color:var(--text-muted);">${r.categoria||'-'}</td><td class="mono" style="color:var(--text-muted);">${dataTxt}</td><td class="mono" style="color:${atrasado?'var(--coral)':urgente?(tipoLancamento==='receita'?'var(--mint)':'var(--coral)'):cor}; font-weight:600;">${label}</td><td class="val-cell">${fmt(r.valor)}</td></tr>`;
+  }).join('');
+  wrap.innerHTML = `<table><thead><tr><th>Descrição</th><th>Categoria</th><th>Data</th><th>Quando</th><th style="text-align:right;">Valor</th></tr></thead><tbody>${rows}</tbody><tfoot><tr style="border-top:1px solid var(--line);"><td colspan="4" style="padding-top:10px; font-weight:600;">Total ${labelPeriodo()}</td><td class="val-cell" style="padding-top:10px; font-weight:700; color:${cor};">${fmt(total)}</td></tr></tfoot></table>${results.length>12 ? `<div style="font-size:12px; color:var(--text-muted); margin-top:8px;">Mostrando 12 de ${results.length} lançamentos.</div>` : ''}`;
+}
+function renderBotoesPeriodo(){
+  const opcoes = [[7,'7 dias'],[15,'15 dias'],[30,'30 dias'],['mes','Mês atual']];
+  document.querySelectorAll('.periodo-agenda').forEach(bar=>{
+    bar.style.cssText = 'display:flex; gap:4px; align-items:center; flex-wrap:wrap; margin-bottom:14px;';
+    bar.innerHTML = '<span class="eyebrow" style="margin-right:6px;">período</span>'+opcoes.map(([v,l])=>`<button class="btn ${String(periodoAgenda)===String(v)?'btn-primary':'btn-ghost'}" data-periodo="${v}" style="padding:6px 11px; font-size:12px;">${l}</button>`).join('');
+    bar.querySelectorAll('[data-periodo]').forEach(b=>{ b.addEventListener('click', ()=>{ const v = b.dataset.periodo; periodoAgenda = (v==='mes') ? 'mes' : parseInt(v,10); renderBotoesPeriodo(); renderProximosVencimentos(); }); });
+  });
+}
+function renderProximosVencimentos(){ renderBotoesPeriodo(); renderAgendaTabela('resumoProximosVencimentos', 'despesa', 'vencendo'); renderAgendaTabela('resumoProximosRecebimentos', 'receita', 'a receber'); }
+function proximaFaturaCartao(card){
+  const hoje = new Date(); const hojeMid = new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate());
+  const hojeKey = todayStr().slice(0,7);
+  for(let i=0;i<12;i++){
+    const mk = i===0 ? hojeKey : addMonthsKey(hojeKey+'-01', i);
+    const val = computeCardMonthlyTotal(card.id, mk);
+    if(val<=0) continue;
+    const [yy,mm] = mk.split('-').map(Number);
+    const venc = new Date(yy, mm-1, card.vencimento);
+    const dias = Math.round((venc - hojeMid)/8640000);
+    const pago = !!state.autoPaidMap['card:'+card.id+':'+mk];
+    if(dias < 0 && pago) continue;
+    return { mk, valor: val, venc, dias, pago };
+  }
+  return null;
+}
+function renderFaturasCartao(){
+  const wrap = document.getElementById('resumoFaturasCartao'); if(!wrap) return;
+  const cards = cartoesNoEscopo();
+  if(cards.length===0){ wrap.innerHTML = '<div class="empty">Nenhum cartão neste filtro.</div>'; return; }
+  let totalProximas = 0;
+  const linhas = cards.map((c,i)=>{
+    const color = CHART_COLORS[i % CHART_COLORS.length];
+    const nomeCol = `<td><span style="display:inline-block;width:9px;height:9px;border-radius:3px;background:${color};margin-right:8px;"></span>${c.nome}</td>`;
+    const f = proximaFaturaCartao(c);
+    if(!f) return `<tr>${nomeCol}<td class="val-cell" style="color:var(--text-muted);">—</td><td style="color:var(--text-muted);">sem fatura em aberto</td></tr>`;
+    totalProximas += f.valor;
+    const dataTxt = String(f.venc.getDate()).padStart(2,'0')+'/'+String(f.venc.getMonth()+1).padStart(2,'0')+'/'+f.venc.getFullYear();
+    const atrasado = f.dias<0;
+    const quando = atrasado ? `Atrasado ${Math.abs(f.dias)} ${Math.abs(f.dias)===1?'dia':'dias'}` : f.dias===0 ? 'Vence hoje' : f.dias===1 ? 'Vence amanhã' : `Faltam ${f.dias} dias`;
+    const cor = atrasado ? 'var(--coral)' : f.dias<=3 ? 'var(--amber)' : 'var(--text-muted)';
+    return `<tr>${nomeCol}<td class="val-cell" style="font-weight:600;">${fmt(f.valor)}</td><td><span class="mono" style="color:${cor}; font-weight:600;">${quando}</span> <span style="color:var(--text-muted); font-size:12px;">· ${dataTxt}${f.pago?' · paga':''}</span></td></tr>`;
+  }).join('');
+  wrap.innerHTML = `<table><thead><tr><th>Cartão</th><th style="text-align:right;">Próxima fatura</th><th>Vencimento</th></tr></thead><tbody>${linhas}</tbody><tfoot><tr style="border-top:1px solid var(--line);"><td style="padding-top:10px; font-weight:600;">Total das próximas faturas</td><td class="val-cell" style="padding-top:10px; font-weight:700; color:var(--amber);">${fmt(totalProximas)}</td><td></td></tr></tfoot></table>`;
+}
+function renderResumoLimiteBars(){
+  const wrap = document.getElementById('resumoLimiteBars'); if(!wrap) return;
+  const cardsVis = cartoesNoEscopo();
+  if(cardsVis.length===0){ wrap.innerHTML = '<div class="empty">Nenhum cartão neste filtro.</div>'; return; }
+  wrap.innerHTML = cardsVis.map((c,i)=>{ const spent = cardSpent(c.id); const pct = c.limite>0 ? Math.min(100, spent/c.limite*100) : 0; const color = pct>90 ? 'var(--coral)' : pct>70 ? 'var(--amber)' : CHART_COLORS[i%CHART_COLORS.length]; return `<div class="bar-row" style="grid-template-columns:140px 1fr 130px;"><div style="font-size:13px;">${c.nome}</div><div class="bar-bg"><div class="bar-fg" style="width:${pct}%; background:${color};"></div></div><div class="amt">${fmt(spent)} <span style="opacity:.7;">/ ${fmt(c.limite)}</span></div></div>`; }).join('');
+}
+function renderResumoComposicaoChart(totalGastoCartoes, totalSaldoBoards){
+  const wrap = document.getElementById('resumoComposicaoChart'); if(!wrap) return;
+  const total = totalGastoCartoes + totalSaldoBoards;
+  if(total<=0){ wrap.innerHTML = '<div class="empty">Sem dados ainda.</div>'; return; }
+  const slices = [{ label:'Cartões de crédito', valor:totalGastoCartoes, color:'#4fd1a5' },{ label:'Financiamentos/tabelas', valor:totalSaldoBoards, color:'#e8a33d' }].filter(s=>s.valor>0);
+  const cx=90, cy=90, r=80, rInner=48; let angle = -Math.PI/2; let paths = '';
+  slices.forEach(s=>{ const sliceAngle = (s.valor/total) * Math.PI*2; paths += `<path d="${donutArcPath(cx,cy,r,rInner,angle,angle+sliceAngle)}" fill="${s.color}"></path>`; angle += sliceAngle; });
+  const legend = slices.map(s=>`<div style="display:flex; justify-content:space-between; gap:12px; font-size:13px; padding:4px 0;"><span><span style="display:inline-block;width:9px;height:9px;border-radius:3px;background:${s.color};margin-right:8px;"></span>${s.label}</span><span class="mono" style="color:var(--text-muted);">${fmt(s.valor)} · ${(s.valor/total*100).toFixed(0)}%</span></div>`).join('');
+  wrap.innerHTML = `<div style="display:flex; gap:20px; align-items:center; flex-wrap:wrap;"><svg width="180" height="180" viewBox="0 0 180 180">${paths}<text x="90" y="86" text-anchor="middle" fill="var(--text-muted)" font-family="IBM Plex Mono, monospace" font-size="10">devendo</text><text x="90" y="102" text-anchor="middle" fill="var(--text)" font-family="IBM Plex Mono, monospace" font-size="13" font-weight="600">${fmt(total).replace('R$ ','R$')}</text></svg><div style="flex:1; min-width:160px;">${legend}</div></div>`;
+}
+
+function renderCards(){
+  const col = document.getElementById('cardsCol');
+  const emEscopo = cartoesNoEscopo();
+  if(!emEscopo.some(c=>c.id===state.selectedCard)){ state.selectedCard = emEscopo[0]?.id || null; }
+  let html = '';
+  emEscopo.forEach((c,i)=>{
+    const spent = cardSpent(c.id); const pct = c.limite>0 ? Math.min(100, spent/c.limite*100) : 0;
+    const colors = CARD_COLORS[i % CARD_COLORS.length]; const barColor = pct>90 ? 'var(--coral)' : pct>70 ? 'var(--amber)' : '#fff';
+    html += `<div class="credit-card ${state.selectedCard===c.id?'selected':''}" style="background:linear-gradient(135deg,${colors[0]},${colors[1]})" data-id="${c.id}"><button class="del-btn" data-del="${c.id}" title="Excluir cartão">✕</button><button class="edit-btn" data-cardedit="${c.id}" title="Editar">✎</button><div class="top-row"><div class="chip"></div></div><div><div class="name">${c.nome}</div><div class="dates">Fecha dia ${c.fechamento} · Vence dia ${c.vencimento} ${c.final ? '· •••• '+c.final : ''}</div><div class="dates" style="margin-top:2px;">${itemTitularLabel(c) ? '👤 '+itemTitularLabel(c) : '<span style=\'color:#ffcf8a;\'>⚠ sem titular</span>'}</div></div><div><div class="bar-track"><div class="bar-fill" style="width:${pct}%; background:${barColor};"></div></div><div class="bottom-row"><span>gasto: <span class="used">${fmt(spent)}</span></span><span>limite ${fmt(c.limite)}</span></div></div></div>`;
+  });
+  html += `<button class="add-card-btn" id="addCardBtn">+ Adicionar cartão</button>`;
+  col.innerHTML = html;
+  col.querySelectorAll('.credit-card').forEach(elm=>{ elm.addEventListener('click', (ev)=>{ if(ev.target.closest('.del-btn') || ev.target.closest('[data-cardedit]')) return; state.selectedCard = elm.dataset.id; save(); render(); }); });
+  col.querySelectorAll('[data-del]').forEach(btn=>{ btn.addEventListener('click', (ev)=>{ ev.stopPropagation(); const id = btn.dataset.del; showConfirm('Excluir este cartão e todos os seus gastos?', ()=>{ state.cards = state.cards.filter(c=>c.id!==id); state.transactions = state.transactions.filter(t=>t.cardId!==id); if(state.selectedCard===id) state.selectedCard = state.cards[0]?.id || null; save(); render(); }); }); });
+  col.querySelectorAll('[data-cardedit]').forEach(btn=>{ btn.addEventListener('click', (ev)=>{ ev.stopPropagation(); const c = state.cards.find(c=>c.id===btn.dataset.cardedit); openAddCardForm(c); }); });
+  document.getElementById('addCardBtn').addEventListener('click', ()=>openAddCardForm(null));
+}
+
+function openAddCardForm(editCard){
+  const isEdit = !!editCard; const col = document.getElementById('cardsCol');
+  const wrap = document.createElement('div'); wrap.className = 'panel'; wrap.style.padding='18px';
+  wrap.innerHTML = `<div class="form-grid"><div><label>Nome do cartão</label><input id="f-nome" placeholder="Ex: Nubank" value="${isEdit ? editCard.nome.replace(/"/g,'"') : ''}"></div><div><label>Final</label><input id="f-final" placeholder="1234" maxlength="4" value="${isEdit ? (editCard.final||'') : ''}"></div><div><label>Limite (R$)</label><input id="f-limite" type="number" placeholder="0,00" value="${isEdit ? editCard.limite : ''}"></div><div><label>Dia fechamento</label><input id="f-fech" type="number" min="1" max="31" placeholder="5" value="${isEdit ? editCard.fechamento : ''}"></div><div><label>Dia vencimento</label><input id="f-venc" type="number" min="1" max="31" placeholder="12" value="${isEdit ? editCard.vencimento : ''}"></div>${camposTitularHTML(isEdit ? editCard : null, 'f')}<div><label>Fatura paga por qual conta</label><select id="f-conta"><option value="">— não informado —</option>${state.accounts.map(a=>`<option value="${a.id}" ${isEdit && editCard.accountId===a.id?'selected':''}>${a.nome}${a.banco ? ' ('+a.banco+')' : ''}</option>`).join('')}</select></div></div><div style="display:flex; gap:8px;"><button class="btn btn-primary" id="saveCardBtn">${isEdit ? 'Salvar alterações' : 'Salvar cartão'}</button><button class="btn btn-ghost" id="cancelCardBtn">Cancelar</button></div>`;
+  col.insertBefore(wrap, col.lastElementChild);
+  document.getElementById('cancelCardBtn').addEventListener('click', ()=>wrap.remove());
+  document.getElementById('saveCardBtn').addEventListener('click', ()=>{
+    const nome = document.getElementById('f-nome').value.trim(); const limite = parseFloat(document.getElementById('f-limite').value)||0;
+    const fechamento = parseInt(document.getElementById('f-fech').value)||1; const vencimento = parseInt(document.getElementById('f-venc').value)||1;
+    const final = document.getElementById('f-final').value.trim(); const accountId = document.getElementById('f-conta').value || null;
+    const titular = document.getElementById('f-titular').value.trim(); const tipo = document.getElementById('f-tipo').value || null;
+    if(!nome){ showAlert('Informe o nome do cartão.'); return; }
+    if(isEdit){ Object.assign(editCard, { nome, limite, fechamento, vencimento, final, accountId, titular, tipo }); }
+    else { const newCard = { id: uid(), nome, limite, fechamento, vencimento, final, accountId, titular, tipo }; state.cards.push(newCard); state.selectedCard = newCard.id; }
+    save(); render();
+  });
+}
+
+function renderTxPanel(){
+  const title = document.getElementById('panelTitle'); const addBtn = document.getElementById('addTxBtn');
+  const formWrap = document.getElementById('txFormWrap'); const tableWrap = document.getElementById('txTableWrap');
+  const card = cartoesNoEscopo().find(c=>c.id===state.selectedCard);
+  if(!card){ title.textContent = 'Selecione um cartão'; addBtn.style.display='none'; formWrap.style.display='none'; tableWrap.innerHTML = '<div class="empty">Cadastre ou selecione um cartão para lançar gastos.</div>'; return; }
+  title.textContent = 'Gastos — '+card.nome; addBtn.style.display='inline-block'; addBtn.onclick = ()=> toggleTxForm(true, card.id);
+  const todasTxs = state.transactions.filter(t=>t.cardId===card.id);
+  const navWrap = document.getElementById('txMonthNav');
+  if(navWrap){
+    navWrap.style.display = todasTxs.length ? 'flex' : 'none';
+    const lbl = document.getElementById('txMonthLabel');
+    if(txMesFatura==='todos'){ lbl.textContent = 'Todas'; document.getElementById('txMonthTotal').textContent = ''; }
+    else { const [ty,tm] = txMesFatura.split('-'); lbl.textContent = MONTH_NAMES[parseInt(tm,10)-1]+' de '+ty; const totalMes = computeCardMonthlyTotal(card.id, txMesFatura); document.getElementById('txMonthTotal').innerHTML = 'Total da fatura: <strong style="color:var(--amber);">'+fmt(totalMes)+'</strong>'; }
+    document.getElementById('txAllMonthsBtn').className = 'btn '+(txMesFatura==='todos'?'btn-primary':'btn-ghost');
+  }
+  let txs;
+  if(txMesFatura==='todos'){ txs = todasTxs.map(t=>({ t, parcelaNoMes:null })); }
+  else {
+    txs = [];
+    todasTxs.forEach(t=>{
+      const tipo = txTipo(t); const primeira = faturaMesDaCompra(card, t.data);
+      if(primeira === txMesFatura){ txs.push({ t, parcelaNoMes: t.parcelaAtual||1 }); return; }
+      let remaining = 0;
+      if(tipo==='parcelado'){ remaining = (t.parcelasTotal || t.parcelas || 1) - (t.parcelaAtual || 1); }
+      else if(tipo==='recorrente'){ remaining = t.mesesProjecao || 12; }
+      for(let i=1;i<=remaining;i++){ if(addMonthsKey(primeira+'-01', i) === txMesFatura){ txs.push({ t, parcelaNoMes: (t.parcelaAtual||1) + i }); break; } }
+    });
+  }
+  txs.sort((a,b)=> b.t.data.localeCompare(a.t.data));
+  if(txs.length===0){ tableWrap.innerHTML = todasTxs.length ? '<div class="empty">Nenhum gasto nesta fatura.</div>' : '<div class="empty">Nenhum gasto lançado neste cartão ainda.</div>'; return; }
+  let rows = txs.map(({t, parcelaNoMes})=>{
+    const tipo = txTipo(t); const total = t.parcelasTotal || t.parcelas || 1; const atual = parcelaNoMes || t.parcelaAtual || 1;
+    let parcTxt = '-';
+    if(tipo==='parcelado') parcTxt = atual+'/'+total;
+    else if(tipo==='recorrente') parcTxt = '<span class="tag" style="background:rgba(79,209,165,.15); color:var(--mint);">recorrente</span>';
+    const faturaKey = faturaMesDaCompra(card, t.data); const [fy,fm] = faturaKey.split('-');
+    const faturaTxt = MONTH_NAMES[parseInt(fm,10)-1]+'/'+fy.slice(2); const adiada = faturaKey !== t.data.slice(0,7);
+    return `<tr><td class="mono">${t.data.split('-').reverse().join('/')}</td><td class="mono" style="color:${adiada?'var(--amber)':'var(--text-muted)'};" title="${adiada?'Compra após o fechamento — entra na fatura seguinte':'Fatura deste mês'}">${faturaTxt}${adiada?' ↗':''}</td><td>${t.fornecedor || '-'}</td><td>${t.descricao}</td><td><span class="tag">${t.categoria}</span></td><td class="${tipo==='recorrente' ? '' : 'mono'}">${parcTxt}</td><td class="val-cell">${fmt(t.valor)}</td><td style="white-space:nowrap;"><button class="row-del" data-txedit="${t.id}" title="Editar">✎</button><button class="row-del" data-txdup="${t.id}" title="Duplicar">⧉</button><button class="row-del" data-txdel="${t.id}" title="Excluir">✕</button></td></tr>`;
+  }).join('');
+  tableWrap.innerHTML = `<table><thead><tr><th>Data</th><th>Fatura</th><th>Fornecedor</th><th>Descrição</th><th>Categoria</th><th>Parcela</th><th style="text-align:right;">Valor</th><th></th></tr></thead><tbody>${rows}</tbody></table>`;
+  tableWrap.querySelectorAll('[data-txdel]').forEach(btn=>{ btn.addEventListener('click', ()=>{ state.transactions = state.transactions.filter(t=>t.id!==btn.dataset.txdel); save(); render(); }); });
+  tableWrap.querySelectorAll('[data-txedit]').forEach(btn=>{ btn.addEventListener('click', ()=>{ const tx = state.transactions.find(t=>t.id===btn.dataset.txedit); toggleTxForm(true, card.id, tx); }); });
+  tableWrap.querySelectorAll('[data-txdup]').forEach(btn=>{ btn.addEventListener('click', ()=>{ const tx = state.transactions.find(t=>t.id===btn.dataset.txdup); toggleTxForm(true, card.id, tx, true); }); });
+}
+
+function toggleTxForm(show, cardId, editTx, forceNew){
+  const formWrap = document.getElementById('txFormWrap');
+  if(!show){ formWrap.style.display='none'; formWrap.innerHTML=''; return; }
+  formWrap.style.display='block';
+  const isEdit = !!editTx && !forceNew; const prefill = editTx || null;
+  const dataVal = prefill ? (forceNew ? todayStr() : prefill.data) : todayStr();
+  const fornecedorVal = prefill ? (prefill.fornecedor || '') : '';
+  const descVal = prefill ? prefill.descricao : ''; const catVal = prefill ? prefill.categoria : state.categories[0];
+  const valorVal = prefill ? prefill.valor : ''; const tipoVal = prefill ? txTipo(prefill) : 'unica';
+  const atualVal = prefill ? (forceNew ? 1 : (prefill.parcelaAtual || 1)) : 1;
+  const totalVal = prefill ? (prefill.parcelasTotal || prefill.parcelas || 1) : 1;
+  const mesesProjVal = prefill ? (prefill.mesesProjecao || 12) : 12;
+  formWrap.innerHTML = `<div class="form-grid"><div><label>Data</label><input id="tx-data" type="date" value="${dataVal}"></div><div><label>Fornecedor</label><input id="tx-fornecedor" placeholder="Ex: Posto Ipiranga" value="${fornecedorVal.replace(/"/g,'"')}"></div><div style="grid-column:span 2;"><label>O que foi comprado</label><input id="tx-desc" placeholder="Ex: Combustível" value="${descVal.replace(/"/g,'"')}"></div><div><label>Categoria</label><select id="tx-cat">${state.categories.map(c=>`<option ${c===catVal?'selected':''}>${c}</option>`).join('')}</select></div><div><label>Valor (R$)</label><input id="tx-valor" type="number" placeholder="0,00" value="${valorVal}"></div><div><label>Tipo de lançamento</label><select id="tx-tipo"><option value="unica" ${tipoVal==='unica'?'selected':''}>Parcela única</option><option value="parcelado" ${tipoVal==='parcelado'?'selected':''}>Parcelado</option><option value="recorrente" ${tipoVal==='recorrente'?'selected':''}>Recorrente (assinatura)</option></select></div><div id="tx-parc-atual-wrap" style="display:none;"><label>Parcela atual</label><input id="tx-parc-atual" type="number" min="1" value="${atualVal}"></div><div id="tx-parc-total-wrap" style="display:none;"><label>Total de parcelas</label><input id="tx-parc-total" type="number" min="1" value="${totalVal}"></div><div id="tx-meses-proj-wrap" style="display:none;"><label>Repetir por quantos meses (gráfico)</label><input id="tx-meses-proj" type="number" min="1" value="${mesesProjVal}"></div></div><div style="display:flex; gap:8px;"><button class="btn btn-primary" id="saveTxBtn">${isEdit ? 'Salvar alterações' : 'Adicionar gasto'}</button><button class="btn btn-ghost" id="cancelTxBtn">Cancelar</button></div>`;
+  function applyTipoVisibility(){ const tipo = document.getElementById('tx-tipo').value; document.getElementById('tx-parc-atual-wrap').style.display = tipo==='parcelado' ? 'block' : 'none'; document.getElementById('tx-parc-total-wrap').style.display = tipo==='parcelado' ? 'block' : 'none'; document.getElementById('tx-meses-proj-wrap').style.display = tipo==='recorrente' ? 'block' : 'none'; }
+  document.getElementById('tx-tipo').addEventListener('change', applyTipoVisibility); applyTipoVisibility();
+  document.getElementById('cancelTxBtn').addEventListener('click', ()=>toggleTxForm(false));
+  document.getElementById('saveTxBtn').addEventListener('click', ()=>{
+    const data = document.getElementById('tx-data').value || todayStr(); const fornecedor = document.getElementById('tx-fornecedor').value.trim();
+    const descricao = document.getElementById('tx-desc').value.trim() || '(sem descrição)'; const categoria = document.getElementById('tx-cat').value;
+    const valor = parseFloat(document.getElementById('tx-valor').value)||0; const tipo = document.getElementById('tx-tipo').value;
+    let parcelaAtual = 1, parcelasTotal = 1, mesesProjecao = 12;
+    if(tipo==='parcelado'){ parcelaAtual = parseInt(document.getElementById('tx-parc-atual').value)||1; parcelasTotal = parseInt(document.getElementById('tx-parc-total').value)||1; if(parcelaAtual > parcelasTotal) parcelaAtual = parcelasTotal; }
+    else if(tipo==='recorrente'){ mesesProjecao = parseInt(document.getElementById('tx-meses-proj').value)||12; }
+    if(valor<=0){ showAlert('Informe um valor válido.'); return; }
+    if(isEdit){ const t = state.transactions.find(t=>t.id===editTx.id); Object.assign(t, { data, fornecedor, descricao, categoria, valor, tipo, parcelaAtual, parcelasTotal, mesesProjecao }); delete t.parcelas; }
+    else { state.transactions.push({ id: uid(), cardId, data, fornecedor, descricao, categoria, valor, tipo, parcelaAtual, parcelasTotal, mesesProjecao }); }
+    toggleTxForm(false); save(); render();
+  });
+}
+
+function renderCategoryBars(){
+  const wrap = document.getElementById('catBars'); const titulo = document.getElementById('catBarsTitle');
+  const card = state.cards.find(c=>c.id===state.selectedCard);
+  if(titulo) titulo.textContent = card ? ('Gastos por categoria — '+card.nome) : 'Gastos por categoria';
+  const idsPermitidos = card ? [card.id] : cartoesNoEscopo().map(c=>c.id);
+  const totals = {};
+  state.transactions.filter(t=>idsPermitidos.includes(t.cardId)).forEach(t=>{ totals[t.categoria] = (totals[t.categoria]||0)+t.valor; });
+  const entries = Object.entries(totals).sort((a,b)=>b[1]-a[1]);
+  if(entries.length===0){ wrap.innerHTML = '<div class="empty">Sem dados ainda.</div>'; return; }
+  const max = entries[0][1];
+  wrap.innerHTML = entries.map(([cat,val],i)=>`<div class="bar-row"><div>${cat}</div><div class="bar-bg"><div class="bar-fg" style="width:${(val/max*100)}%; background:${CHART_COLORS[i%CHART_COLORS.length]};"></div></div><div class="amt">${fmt(val)}</div></div>`).join('');
+}
+
+function addMonthsKey(dateStr, n){ const [y,m] = dateStr.split('-').map(Number); const dt = new Date(y, (m-1)+n, 1); return dt.getFullYear()+'-'+String(dt.getMonth()+1).padStart(2,'0'); }
+
+function renderMonthChart(){
+  const wrap = document.getElementById('monthChart'); const titleEl = document.getElementById('monthChartTitle');
+  const cardsDisponiveis = cartoesNoEscopo();
+  if(cardsDisponiveis.length===0){ wrap.innerHTML = '<div class="empty">Nenhum cartão neste filtro.</div>'; return; }
+  const filterToCard = state.selectedCard || null;
+  const cardsInScope = filterToCard ? cardsDisponiveis.filter(c=>c.id===filterToCard) : cardsDisponiveis;
+  if(titleEl){ if(filterToCard){ const c = state.cards.find(c=>c.id===filterToCard); titleEl.textContent = 'Gastos por mês — '+(c ? c.nome : ''); } else { titleEl.textContent = 'Gastos por mês (todos os cartões)'; } }
+  const totals = {}; cardsInScope.forEach(c=> totals[c.id] = {});
+  state.transactions.forEach(t=>{
+    if(!totals[t.cardId]) return;
+    const cardObj = state.cards.find(c=>c.id===t.cardId);
+    const key = faturaMesDaCompra(cardObj, t.data);
+    totals[t.cardId][key] = (totals[t.cardId][key]||0) + t.valor;
+    const tipo = txTipo(t); let remaining;
+    if(tipo==='recorrente') remaining = t.mesesProjecao || 12;
+    else if(tipo==='unica') remaining = 0;
+    else { const total = t.parcelasTotal || t.parcelas || 1; const atual = t.parcelaAtual || 1; remaining = total - atual; }
+    for(let i=1;i<=remaining;i++){ const fkey = addMonthsKey(key+'-01', i); totals[t.cardId][fkey] = (totals[t.cardId][fkey]||0) + t.valor; }
+  });
+  const allKeys = new Set(); Object.values(totals).forEach(byMonth => Object.keys(byMonth).forEach(k=>allKeys.add(k)));
+  if(allKeys.size===0){ wrap.innerHTML = '<div class="empty">Sem dados ainda.</div>'; return; }
+  const sortedKeys = Array.from(allKeys).sort(); const keys = []; let cursor = sortedKeys[0]; const last = sortedKeys[sortedKeys.length-1];
+  while(true){ keys.push(cursor); if(cursor === last) break; cursor = addMonthsKey(cursor+'-01', 1); }
+  const currentKey = todayStr().slice(0,7);
+  const labelFor = k=>{ const [y,m] = k.split('-'); return MONTH_NAMES[parseInt(m,10)-1]+'/'+y.slice(2); };
+  const stackTotals = keys.map(k => cardsInScope.reduce((s,c)=> s + (totals[c.id][k]||0), 0));
+  const max = Math.max(...stackTotals, 1);
+  const barW = 46, gap = 22, chartH = 170, leftPad = 10;
+  const width = keys.length * (barW+gap) + leftPad*2;
+  let bars = '';
+  keys.forEach((k,i)=>{
+    const x = leftPad + i*(barW+gap); const isFuture = k > currentKey; let yCursor = chartH; let segs = '';
+    cardsInScope.forEach((c)=>{ const globalIdx = state.cards.findIndex(sc=>sc.id===c.id); const val = totals[c.id][k] || 0; if(val<=0) return; const h = (val/max)*(chartH-30); const y = yCursor - h; const color = CHART_COLORS[globalIdx % CHART_COLORS.length]; const fill = isFuture ? color+'55' : color; const stroke = isFuture ? `stroke="${color}" stroke-width="1.2" stroke-dasharray="3,2"` : ''; segs += `<rect x="${x}" y="${y}" width="${barW}" height="${h}" fill="${fill}" ${stroke}></rect>`; yCursor = y; });
+    const totalVal = stackTotals[i];
+    bars += `<g>${segs}<text x="${x+barW/2}" y="${chartH-((totalVal/max)*(chartH-30))-8}" text-anchor="middle" fill="#edeff2" font-family="IBM Plex Mono, monospace" font-size="11">${fmt(totalVal).replace('R$ ','')}</text><text x="${x+barW/2}" y="${chartH+18}" text-anchor="middle" fill="#8ea0b3" font-family="IBM Plex Mono, monospace" font-size="11">${labelFor(k)}${isFuture?' *':''}</text></g>`;
+  });
+  const legendCards = cardsInScope.map((c)=>{ const globalIdx = state.cards.findIndex(sc=>sc.id===c.id); return `<span><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:${CHART_COLORS[globalIdx%CHART_COLORS.length]};margin-right:6px;"></span>${c.nome}</span>`; }).join('');
+  wrap.innerHTML = `<div style="overflow-x:auto;"><svg width="${Math.max(width,300)}" height="${chartH+40}" viewBox="0 0 ${Math.max(width,300)} ${chartH+40}">${bars}</svg></div><div style="display:flex; gap:16px; flex-wrap:wrap; margin-top:12px; font-size:12px; color:var(--text-muted);">${legendCards}</div><div style="margin-top:6px; font-size:11.5px; color:var(--text-muted);">* meses com parcelas previstas (ainda não realizadas)</div>`;
+}
+
+function boardById(id){ return state.boards.find(b=>b.id===id); }
+function boardItemRemaining(item){ const remaining = Math.max(1, item.parcelasTotal - item.parcelaAtual + 1); return item.parcelaValor * remaining; }
+function boardItemLiquidacaoHoje(item){ const saldo = boardItemRemaining(item); if(item.descontoPercent){ return saldo * (1 - item.descontoPercent/100); } if(item.valorQuitacao) return item.valorQuitacao; return null; }
+function buildBoardTotalsHTML(board){
+  const itensF = board ? board.items.filter(itemNoEscopo) : [];
+  if(itensF.length===0) return '<div class="empty">Nenhum item neste filtro.</div>';
+  let rows = itensF.map((it,i)=>{ const saldo = boardItemRemaining(it); const color = CHART_COLORS[i % CHART_COLORS.length]; return `<tr><td><span style="display:inline-block;width:9px;height:9px;border-radius:3px;background:${color};margin-right:8px;"></span>${it.nome}</td><td class="val-cell">${fmt(it.parcelaValor)}</td><td class="mono">${it.parcelaAtual}/${it.parcelasTotal}</td><td class="val-cell">${fmt(saldo)}</td><td class="val-cell">${boardItemLiquidacaoHoje(it) ? fmt(boardItemLiquidacaoHoje(it)) : '-'}</td></tr>`; }).join('');
+  const totalMensal = itensF.reduce((s,it)=> s + it.parcelaValor, 0); const totalSaldo = itensF.reduce((s,it)=> s + boardItemRemaining(it), 0);
+  return `<table><thead><tr><th>${board.nome}</th><th style="text-align:right;">Parcela</th><th>Progresso</th><th style="text-align:right;">Saldo</th><th style="text-align:right;">Liquidação hoje</th></tr></thead><tbody>${rows}</tbody><tfoot><tr style="border-top:1px solid var(--line);"><td style="padding-top:10px; font-weight:600;">Total</td><td class="val-cell" style="padding-top:10px; font-weight:600;">${fmt(totalMensal)}</td><td></td><td class="val-cell" style="padding-top:10px; font-weight:600;">${fmt(totalSaldo)}</td><td></td></tr></tfoot></table>`;
+}
+function navLabelFor(key){ if(key==='resumo') return 'Resumo geral'; if(key==='cards') return 'Cartões de crédito'; if(key==='fluxo') return 'Fluxo de caixa'; if(key==='investimentos') return 'Aplicações financeiras'; if(key==='metas') return 'Metas financeiras'; if(key==='contas') return 'Contas'; const board = boardById(key); return board ? board.nome : key; }
+function moveNavItem(key, direction){ const idx = state.navOrder.indexOf(key); const newIdx = idx + direction; if(idx<0 || newIdx<0 || newIdx>=state.navOrder.length) return; const tmp = state.navOrder[idx]; state.navOrder[idx] = state.navOrder[newIdx]; state.navOrder[newIdx] = tmp; save(); render(); }
+function renderAppNav(){
+  const wrap = document.getElementById('mainNavWrap'); if(!wrap) return;
+  wrap.innerHTML = '';
+  state.navOrder.forEach((key,i)=>{
+    const group = document.createElement('div'); group.style.cssText = 'display:flex; align-items:center; gap:2px;';
+    const btn = document.createElement('button'); btn.className = 'btn '+(appView===key ? 'btn-primary' : 'btn-ghost'); btn.textContent = navLabelFor(key);
+    btn.addEventListener('click', ()=>{ appView = key; applyAppView(); document.getElementById('sidebarMenuPanel').style.display='none'; });
+    group.appendChild(btn);
+    if(i>0){ const leftBtn = document.createElement('button'); leftBtn.className = 'btn btn-ghost'; leftBtn.style.cssText = 'padding:6px 8px; font-size:10px; line-height:1;'; leftBtn.textContent = '◀'; leftBtn.title = 'Mover para a esquerda'; leftBtn.addEventListener('click', (ev)=>{ ev.stopPropagation(); moveNavItem(key, -1); }); group.appendChild(leftBtn); }
+    if(i<state.navOrder.length-1){ const rightBtn = document.createElement('button'); rightBtn.className = 'btn btn-ghost'; rightBtn.style.cssText = 'padding:6px 8px; font-size:10px; line-height:1;'; rightBtn.textContent = '▶'; rightBtn.title = 'Mover para a direita'; rightBtn.addEventListener('click', (ev)=>{ ev.stopPropagation(); moveNavItem(key, 1); }); group.appendChild(rightBtn); }
+    wrap.appendChild(group);
+  });
+}
+function renderResumoBoards(){
+  const wrap = document.getElementById('resumoBoardsWrap'); if(!wrap) return;
+  wrap.innerHTML = state.boards.map(board=>`<div class="panel"><div class="panel-head"><h2>${board.nome}</h2></div><div>${buildBoardTotalsHTML(board)}</div></div>`).join('');
+}
+
+const IOF_TABELA = [96,93,90,86,83,80,76,73,70,66,63,60,56,53,50,46,43,40,36,33,30,26,23,20,16,13,10,6,3,0];
+function iofPercent(dias){ if(dias >= 30) return 0; if(dias < 1) return 96; return IOF_TABELA[dias-1]; }
+function irPercent(dias){ if(dias <= 180) return 22.5; if(dias <= 360) return 20; if(dias <= 720) return 17.5; return 15; }
+function investDiasAplicado(inv){ const inicio = inv.dataAplicacao || inv.data; if(!inicio) return 0; const d0 = new Date(inicio+'T00:00:00'); const hoje = new Date(); const hojeMid = new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate()); return Math.max(0, Math.round((hojeMid - d0)/8640000)); }
+function investValorBruto(inv){ if(inv.modoRendimento === 'cdi'){ const principal = inv.saldoInicial || 0; const cdiAnual = inv.taxaCdiAnual || 0; const percentCdi = inv.percentualCdi || 100; const taxaAnual = (cdiAnual * percentCdi / 100) / 100; const dias = investDiasAplicado(inv); const diasUteis = dias * (252/365); return principal * Math.pow(1 + taxaAnual, diasUteis/252); } return inv.valorAtual || 0; }
+function investDetalhe(inv){ const principal = inv.saldoInicial || 0; const bruto = investValorBruto(inv); const rendimentoBruto = Math.max(0, bruto - principal); const dias = investDiasAplicado(inv); const isento = !!inv.isentoIR; const pctIof = isento ? 0 : iofPercent(dias); const iof = rendimentoBruto * (pctIof/100); const baseIR = Math.max(0, rendimentoBruto - iof); const pctIr = isento ? 0 : irPercent(dias); const ir = baseIR * (pctIr/100); const rendimentoLiquido = rendimentoBruto - iof - ir; return { principal, bruto, rendimentoBruto, dias, pctIof, iof, pctIr, ir, rendimentoLiquido, liquido: principal + rendimentoLiquido, isento }; }
+function investGanho(inv){ if(inv.modoRendimento === 'cdi') return investDetalhe(inv).rendimentoBruto; return (inv.valorAtual||0) - (inv.saldoInicial||0); }
+function investGanhoPct(inv){ if(!inv.saldoInicial) return 0; return (investGanho(inv) / inv.saldoInicial) * 100; }
+
+function renderInvestSection(){
+  const investF = investimentosNoEscopo();
+  const totalInicial = investF.reduce((s,i)=>s+(i.saldoInicial||0),0); const totalAtual = investF.reduce((s,i)=>s+(i.valorAtual||0),0);
+  const totalAporte = investF.reduce((s,i)=>s+(i.aporteMensal||0),0); const ganhoTotal = totalAtual - totalInicial; const pctTotal = totalInicial>0 ? (ganhoTotal/totalInicial*100) : 0;
+  document.getElementById('investSummaryStrip').innerHTML = `<div class="summary-item"><div class="eyebrow">Saldo inicial total</div><div class="val">${fmt(totalInicial)}</div></div><div class="summary-item ${ganhoTotal>=0?'ok':'danger'}"><div class="eyebrow">Valor atual total</div><div class="val">${fmt(totalAtual)}</div></div><div class="summary-item ${ganhoTotal>=0?'ok':'danger'}"><div class="eyebrow">Rendimento</div><div class="val">${ganhoTotal>=0?'+':''}${fmt(ganhoTotal)} (${pctTotal.toFixed(1)}%)</div></div><div class="summary-item"><div class="eyebrow">Aporte mensal planejado</div><div class="val">${fmt(totalAporte)}</div></div>`;
+  renderInvestList(); renderInvestTotalsTable(); renderInvestLiquido(); renderInvestGrowthBars();
+}
+function renderInvestList(){
+  const col = document.getElementById('investCol'); let html = '';
+  investimentosNoEscopo().forEach((inv,i)=>{ const ganho = investGanho(inv); const pct = investGanhoPct(inv); const colors = CARD_COLORS[i % CARD_COLORS.length]; const pctBarWidth = Math.min(100, Math.max(0, 50 + pct)); html += `<div class="credit-card" style="background:linear-gradient(135deg,${colors[0]},${colors[1]})" data-investid="${inv.id}"><button class="del-btn" data-investdel="${inv.id}" title="Excluir">✕</button><button class="edit-btn" data-investedit="${inv.id}" title="Editar">✎</button><div class="top-row"><div class="chip"></div></div><div><div class="name">${inv.nome}</div><div class="dates">${[inv.instituicao, itemTitularLabel(inv) ? '👤 '+itemTitularLabel(inv) : null].filter(Boolean).join(' · ') || '<span style=\'color:#ffcf8a;\'>⚠ sem titular</span>'}</div></div><div><div class="bar-track"><div class="bar-fill" style="width:${pctBarWidth}%; background:${ganho>=0?'#4fd1a5':'#e1543d'};"></div></div><div class="bottom-row"><span>hoje: <span class="used">${fmt(inv.valorAtual||0)}</span></span><span style="color:${ganho>=0?'#c8f5e5':'#f7d9d2'};">${ganho>=0?'+':''}${fmt(ganho)}</span></div><div class="dates" style="margin-top:4px;">Início: ${fmt(inv.saldoInicial||0)}${inv.aporteMensal ? ' · Aporte: '+fmt(inv.aporteMensal)+'/mês' : ''}</div></div></div>`; });
+  html += `<button class="add-card-btn" id="addInvestBtn">+ Adicionar aplicação</button>`;
+  col.innerHTML = html;
+  col.querySelectorAll('[data-investdel]').forEach(btn=>{ btn.addEventListener('click', (ev)=>{ ev.stopPropagation(); showConfirm('Excluir esta aplicação financeira?', ()=>{ state.investments = state.investments.filter(i=>i.id!==btn.dataset.investdel); save(); render(); }); }); });
+  col.querySelectorAll('[data-investedit]').forEach(btn=>{ btn.addEventListener('click', (ev)=>{ ev.stopPropagation(); const inv = state.investments.find(i=>i.id===btn.dataset.investedit); openInvestForm(inv); }); });
+  const addBtn = document.getElementById('addInvestBtn'); if(addBtn) addBtn.addEventListener('click', ()=>openInvestForm(null));
+}
+function openInvestForm(editInv){
+  const col = document.getElementById('investCol'); const isEdit = !!editInv;
+  const wrap = document.createElement('div'); wrap.className = 'panel'; wrap.style.padding='18px';
+  wrap.innerHTML = `<div class="form-grid"><div style="grid-column:span 2;"><label>Nome da aplicação</label><input id="iv-nome" placeholder="Ex: Tesouro Selic, CDB, Ações..." value="${isEdit ? editInv.nome.replace(/"/g,'"') : ''}"></div><div><label>Instituição</label><input id="iv-instituicao" placeholder="Ex: Nubank, XP..." value="${isEdit ? (editInv.instituicao||'').replace(/"/g,'"') : ''}"></div><div><label>Saldo inicial (R$)</label><input id="iv-saldo-inicial" type="number" placeholder="0,00" value="${isEdit ? editInv.saldoInicial : ''}"></div><div><label>Valor atual — quanto tem hoje (R$)</label><input id="iv-valor-atual" type="number" placeholder="0,00" value="${isEdit ? editInv.valorAtual : ''}"></div><div><label>Como calcular o rendimento</label><select id="iv-modo"><option value="manual" ${(!isEdit || editInv.modoRendimento!=='cdi')?'selected':''}>Informo o valor atual</option><option value="cdi" ${isEdit && editInv.modoRendimento==='cdi'?'selected':''}>Calcular pelo CDI</option></select></div><div><label>Data da aplicação</label><input id="iv-data-aplicacao" type="date" value="${isEdit ? (editInv.dataAplicacao || editInv.data || '') : todayStr()}"></div><div id="iv-cdi-wrap1" style="display:none;"><label>% do CDI (ex: 110)</label><input id="iv-percentual-cdi" type="number" step="0.1" placeholder="100" value="${isEdit && editInv.percentualCdi ? editInv.percentualCdi : '100'}"></div><div id="iv-cdi-wrap2" style="display:none;"><label>CDI atual (% a.a.)</label><input id="iv-taxa-cdi" type="number" step="0.01" placeholder="Ex: 10.65" value="${isEdit && editInv.taxaCdiAnual ? editInv.taxaCdiAnual : ''}"></div><div><label>Isento de IR/IOF (LCI, LCA, poupança)</label><select id="iv-isento"><option value="nao" ${(!isEdit || !editInv.isentoIR)?'selected':''}>Não — tributado</option><option value="sim" ${isEdit && editInv.isentoIR?'selected':''}>Sim — isento</option></select></div><div><label>Aporte mensal planejado (opcional)</label><input id="iv-aporte" type="number" placeholder="0,00" value="${isEdit && editInv.aporteMensal ? editInv.aporteMensal : ''}"></div><div><label>Data de referência</label><input id="iv-data" type="date" value="${isEdit ? editInv.data : todayStr()}"></div>${camposTitularHTML(isEdit ? editInv : null, 'iv')}<div><label>Vinculada a qual conta</label><select id="iv-conta"><option value="">— não informado —</option>${state.accounts.map(a=>`<option value="${a.id}" ${isEdit && editInv.accountId===a.id?'selected':''}>${a.nome}${a.banco ? ' ('+a.banco+')' : ''}</option>`).join('')}</select></div></div><div style="display:flex; gap:8px;"><button class="btn btn-primary" id="saveInvestBtn">${isEdit ? 'Salvar alterações' : 'Salvar aplicação'}</button><button class="btn btn-ghost" id="cancelInvestBtn">Cancelar</button></div>`;
+  col.insertBefore(wrap, col.lastElementChild);
+  function aplicarModoRendimento(){ const cdi = document.getElementById('iv-modo').value === 'cdi'; document.getElementById('iv-cdi-wrap1').style.display = cdi ? 'block' : 'none'; document.getElementById('iv-cdi-wrap2').style.display = cdi ? 'block' : 'none'; const campoAtual = document.getElementById('iv-valor-atual'); campoAtual.readOnly = cdi; campoAtual.style.opacity = cdi ? '0.55' : '1'; }
+  document.getElementById('iv-modo').addEventListener('change', aplicarModoRendimento); aplicarModoRendimento();
+  document.getElementById('cancelInvestBtn').addEventListener('click', ()=>wrap.remove());
+  document.getElementById('saveInvestBtn').addEventListener('click', ()=>{
+    const nome = document.getElementById('iv-nome').value.trim(); const instituicao = document.getElementById('iv-instituicao').value.trim();
+    const saldoInicial = parseFloat(document.getElementById('iv-saldo-inicial').value)||0; const valorAtual = parseFloat(document.getElementById('iv-valor-atual').value)||0;
+    const aporteMensal = parseFloat(document.getElementById('iv-aporte').value)||0; const data = document.getElementById('iv-data').value || todayStr();
+    const accountId = document.getElementById('iv-conta').value || null; const titular = document.getElementById('iv-titular').value.trim(); const tipo = document.getElementById('iv-tipo').value || null;
+    const modoRendimento = document.getElementById('iv-modo').value; const dataAplicacao = document.getElementById('iv-data-aplicacao').value || null;
+    const percentualCdi = parseFloat(document.getElementById('iv-percentual-cdi').value) || 100; const taxaCdiAnual = parseFloat(document.getElementById('iv-taxa-cdi').value) || 0;
+    const isentoIR = document.getElementById('iv-isento').value === 'sim';
+    if(!nome){ showAlert('Informe o nome da aplicação.'); return; }
+    if(isEdit){ Object.assign(editInv, { nome, instituicao, saldoInicial, valorAtual, aporteMensal, data, accountId, titular, tipo, modoRendimento, dataAplicacao, percentualCdi, taxaCdiAnual, isentoIR }); }
+    else { state.investments.push({ id: uid(), nome, instituicao, saldoInicial, valorAtual, aporteMensal, data, accountId, titular, tipo, modoRendimento, dataAplicacao, percentualCdi, taxaCdiAnual, isentoIR }); }
+    save(); render();
+  });
+}
+function renderInvestLiquido(){
+  const wrap = document.getElementById('investLiquidoTable'); if(!wrap) return;
+  const investF = investimentosNoEscopo();
+  if(investF.length===0){ wrap.innerHTML = '<div class="empty">Nenhuma aplicação neste filtro.</div>'; return; }
+  const linhas = investF.map(inv=>{ const d = investDetalhe(inv); return `<tr><td>${inv.nome}${d.isento ? ' <span class="tag" style="font-size:10px;">isento</span>' : ''}</td><td class="mono">${d.dias} dias</td><td class="val-cell" style="color:var(--mint);">${fmt(d.rendimentoBruto)}</td><td class="val-cell" style="color:var(--text-muted);">${d.iof>0 ? '-'+fmt(d.iof)+' ('+d.pctIof+'%)' : '-'}</td><td class="val-cell" style="color:var(--text-muted);">${d.ir>0 ? '-'+fmt(d.ir)+' ('+d.pctIr+'%)' : '-'}</td><td class="val-cell" style="font-weight:600; color:var(--mint);">${fmt(d.rendimentoLiquido)}</td><td class="val-cell" style="font-weight:600;">${fmt(d.liquido)}</td></tr>`; }).join('');
+  const somaBruto = investF.reduce((s,i)=>s+investDetalhe(i).rendimentoBruto,0); const somaIof = investF.reduce((s,i)=>s+investDetalhe(i).iof,0); const somaIr = investF.reduce((s,i)=>s+investDetalhe(i).ir,0); const somaLiq = investF.reduce((s,i)=>s+investDetalhe(i).rendimentoLiquido,0); const somaTotal = investF.reduce((s,i)=>s+investDetalhe(i).liquido,0);
+  wrap.innerHTML = `<table><thead><tr><th>Aplicação</th><th>Aplicado há</th><th style="text-align:right;">Rend. bruto</th><th style="text-align:right;">IOF</th><th style="text-align:right;">IR</th><th style="text-align:right;">Rend. líquido</th><th style="text-align:right;">Resgate hoje</th></tr></thead><tbody>${linhas}</tbody><tfoot><tr style="border-top:1px solid var(--line);"><td colspan="2" style="padding-top:10px; font-weight:600;">Total</td><td class="val-cell" style="padding-top:10px; font-weight:600;">${fmt(somaBruto)}</td><td class="val-cell" style="padding-top:10px;">${somaIof>0?'-'+fmt(somaIof):'-'}</td><td class="val-cell" style="padding-top:10px;">${somaIr>0?'-'+fmt(somaIr):'-'}</td><td class="val-cell" style="padding-top:10px; font-weight:700; color:var(--mint);">${fmt(somaLiq)}</td><td class="val-cell" style="padding-top:10px; font-weight:700;">${fmt(somaTotal)}</td></tr></tfoot></table><div style="font-size:11.5px; color:var(--text-muted); margin-top:12px; line-height:1.5;">Estimativa com base nas tabelas regressivas de IOF e IR. Os valores reais dependem do produto e das taxas da instituição.</div>`;
+}
+function renderInvestTotalsTable(){
+  const wrap = document.getElementById('investTotalsTable'); const investF = investimentosNoEscopo();
+  if(investF.length===0){ wrap.innerHTML = '<div class="empty">Nenhuma aplicação neste filtro.</div>'; return; }
+  let rows = investF.map((inv,i)=>{ const ganho = investGanho(inv); const pct = investGanhoPct(inv); const color = CHART_COLORS[i % CHART_COLORS.length]; return `<tr><td><span style="display:inline-block;width:9px;height:9px;border-radius:3px;background:${color};margin-right:8px;"></span>${inv.nome}</td><td class="val-cell">${fmt(inv.saldoInicial||0)}</td><td class="val-cell">${fmt(inv.valorAtual||0)}</td><td class="val-cell" style="color:${ganho>=0?'var(--mint)':'var(--coral)'}">${ganho>=0?'+':''}${fmt(ganho)}</td><td class="val-cell mono" style="color:${pct>=0?'var(--mint)':'var(--coral)'}">${pct.toFixed(1)}%</td></tr>`; }).join('');
+  wrap.innerHTML = `<table><thead><tr><th>Aplicação</th><th style="text-align:right;">Saldo inicial</th><th style="text-align:right;">Valor atual</th><th style="text-align:right;">Ganho</th><th style="text-align:right;">%</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+function renderInvestGrowthBars(){
+  const wrap = document.getElementById('investGrowthBars'); const investF = investimentosNoEscopo();
+  if(investF.length===0){ wrap.innerHTML = '<div class="empty">Nenhuma aplicação neste filtro.</div>'; return; }
+  const max = Math.max(...investF.map(i=>Math.max(i.saldoInicial||0, i.valorAtual||0)), 1);
+  wrap.innerHTML = investF.map(inv=>`<div style="margin-bottom:14px;"><div style="font-size:13px; margin-bottom:6px;">${inv.nome}</div><div class="bar-row" style="grid-template-columns:80px 1fr 100px; margin-bottom:4px;"><div style="font-size:11.5px; color:var(--text-muted);">Início</div><div class="bar-bg"><div class="bar-fg" style="width:${(inv.saldoInicial||0)/max*100}%; background:var(--text-muted);"></div></div><div class="amt">${fmt(inv.saldoInicial||0)}</div></div><div class="bar-row" style="grid-template-columns:80px 1fr 100px;"><div style="font-size:11.5px; color:var(--text-muted);">Hoje</div><div class="bar-bg"><div class="bar-fg" style="width:${(inv.valorAtual||0)/max*100}%; background:${investGanho(inv)>=0?'#4fd1a5':'#e1543d'};"></div></div><div class="amt">${fmt(inv.valorAtual||0)}</div></div></div>`).join('');
+}
+
+function goalMesesRestantes(goal){ if(!goal.dataAlvo) return null; const hoje = new Date(); const alvo = new Date(goal.dataAlvo+'T00:00:00'); const meses = (alvo.getFullYear()-hoje.getFullYear())*12 + (alvo.getMonth()-hoje.getMonth()); return Math.max(0, meses); }
+function goalAporteNecessario(goal){ const faltam = (goal.valorAlvo||0) - (goal.valorAtual||0); if(faltam<=0) return 0; const meses = goalMesesRestantes(goal); if(meses===null || meses<=0) return faltam; return faltam / meses; }
+function renderGoalsSection(){
+  const goalsF = metasNoEscopo();
+  const totalAlvo = goalsF.reduce((s,g)=>s+(g.valorAlvo||0),0); const totalAtual = goalsF.reduce((s,g)=>s+(g.valorAtual||0),0);
+  const totalAporteNecessario = goalsF.reduce((s,g)=>s+goalAporteNecessario(g),0); const pctGeral = totalAlvo>0 ? (totalAtual/totalAlvo*100) : 0;
+  document.getElementById('goalsSummaryStrip').innerHTML = `<div class="summary-item"><div class="eyebrow">Total das metas</div><div class="val">${fmt(totalAlvo)}</div></div><div class="summary-item ok"><div class="eyebrow">Já guardado</div><div class="val">${fmt(totalAtual)}</div></div><div class="summary-item ${pctGeral>=100?'ok':'warn'}"><div class="eyebrow">Progresso geral</div><div class="val">${pctGeral.toFixed(0)}%</div></div><div class="summary-item"><div class="eyebrow">Aporte mensal necessário</div><div class="val">${fmt(totalAporteNecessario)}</div></div>`;
+  renderGoalsList(); renderGoalsTotalsTable();
+}
+function renderGoalsList(){
+  const col = document.getElementById('goalsCol'); let html = '';
+  metasNoEscopo().forEach((g,i)=>{ const pct = g.valorAlvo>0 ? Math.min(100, (g.valorAtual||0)/g.valorAlvo*100) : 0; const colors = CARD_COLORS[i % CARD_COLORS.length]; const meses = goalMesesRestantes(g); html += `<div class="credit-card" style="background:linear-gradient(135deg,${colors[0]},${colors[1]})" data-goalid="${g.id}"><button class="del-btn" data-goaldel="${g.id}" title="Excluir">✕</button><button class="edit-btn" data-goaledit="${g.id}" title="Editar">✎</button><div class="top-row"><div class="chip"></div></div><div><div class="name">${g.nome}</div><div class="dates">${g.dataAlvo ? 'Meta para '+g.dataAlvo.split('-').reverse().join('/') : 'Sem prazo definido'}${meses!==null ? ' ('+meses+' meses)' : ''}</div><div class="dates" style="margin-top:2px;">${itemTitularLabel(g) ? '👤 '+itemTitularLabel(g) : '<span style=\'color:#ffcf8a;\'>⚠ sem titular</span>'}</div></div><div><div class="bar-track"><div class="bar-fill" style="width:${pct}%; background:${pct>=100?'#4fd1a5':'#fff'};"></div></div><div class="bottom-row"><span>${fmt(g.valorAtual||0)} <span style="opacity:.75;">/ ${fmt(g.valorAlvo||0)}</span></span><span>${pct.toFixed(0)}%</span></div></div></div>`; });
+  html += `<button class="add-card-btn" id="addGoalBtn">+ Adicionar meta</button>`;
+  col.innerHTML = html;
+  col.querySelectorAll('[data-goaldel]').forEach(btn=>{ btn.addEventListener('click', (ev)=>{ ev.stopPropagation(); showConfirm('Excluir esta meta financeira?', ()=>{ state.goals = state.goals.filter(g=>g.id!==btn.dataset.goaldel); save(); render(); }); }); });
+  col.querySelectorAll('[data-goaledit]').forEach(btn=>{ btn.addEventListener('click', (ev)=>{ ev.stopPropagation(); const g = state.goals.find(g=>g.id===btn.dataset.goaledit); openGoalForm(g); }); });
+  const addBtn = document.getElementById('addGoalBtn'); if(addBtn) addBtn.addEventListener('click', ()=>openGoalForm(null));
+}
+function openGoalForm(editGoal){
+  const col = document.getElementById('goalsCol'); const isEdit = !!editGoal;
+  const wrap = document.createElement('div'); wrap.className = 'panel'; wrap.style.padding='18px';
+  wrap.innerHTML = `<div class="form-grid"><div style="grid-column:span 2;"><label>Nome da meta</label><input id="gl-nome" placeholder="Ex: Reserva de emergência, Viagem, Carro..." value="${isEdit ? editGoal.nome.replace(/"/g,'"') : ''}"></div><div><label>Valor alvo (R$)</label><input id="gl-alvo" type="number" placeholder="0,00" value="${isEdit ? editGoal.valorAlvo : ''}"></div><div><label>Já guardado hoje (R$)</label><input id="gl-atual" type="number" placeholder="0,00" value="${isEdit ? editGoal.valorAtual : ''}"></div><div><label>Data alvo (opcional)</label><input id="gl-data" type="date" value="${isEdit ? (editGoal.dataAlvo||'') : ''}"></div>${camposTitularHTML(isEdit ? editGoal : null, 'gl')}</div><div style="display:flex; gap:8px;"><button class="btn btn-primary" id="saveGoalBtn">${isEdit ? 'Salvar alterações' : 'Salvar meta'}</button><button class="btn btn-ghost" id="cancelGoalBtn">Cancelar</button></div>`;
+  col.insertBefore(wrap, col.lastElementChild);
+  document.getElementById('cancelGoalBtn').addEventListener('click', ()=>wrap.remove());
+  document.getElementById('saveGoalBtn').addEventListener('click', ()=>{
+    const nome = document.getElementById('gl-nome').value.trim(); const valorAlvo = parseFloat(document.getElementById('gl-alvo').value)||0;
+    const valorAtual = parseFloat(document.getElementById('gl-atual').value)||0; const dataAlvo = document.getElementById('gl-data').value || null;
+    const titular = document.getElementById('gl-titular').value.trim(); const tipo = document.getElementById('gl-tipo').value || null;
+    if(!nome){ showAlert('Informe o nome da meta.'); return; } if(valorAlvo<=0){ showAlert('Informe um valor alvo válido.'); return; }
+    if(isEdit){ Object.assign(editGoal, { nome, valorAlvo, valorAtual, dataAlvo, titular, tipo }); }
+    else { state.goals.push({ id: uid(), nome, valorAlvo, valorAtual, dataAlvo, titular, tipo }); }
+    save(); render();
+  });
+}
+function renderGoalsTotalsTable(){
+  const wrap = document.getElementById('goalsTotalsTable'); const goalsF = metasNoEscopo();
+  if(goalsF.length===0){ wrap.innerHTML = '<div class="empty">Nenhuma meta neste filtro.</div>'; return; }
+  let rows = goalsF.map((g,i)=>{ const pct = g.valorAlvo>0 ? Math.min(100, (g.valorAtual||0)/g.valorAlvo*100) : 0; const aporte = goalAporteNecessario(g); const meses = goalMesesRestantes(g); const color = CHART_COLORS[i % CHART_COLORS.length]; return `<tr><td><span style="display:inline-block;width:9px;height:9px;border-radius:3px;background:${color};margin-right:8px;"></span>${g.nome}</td><td class="val-cell">${fmt(g.valorAtual||0)}</td><td class="val-cell">${fmt(g.valorAlvo||0)}</td><td class="mono" style="color:${pct>=100?'var(--mint)':'var(--amber)'}">${pct.toFixed(0)}%</td><td>${meses!==null ? meses+' meses' : '-'}</td><td class="val-cell">${pct>=100 ? '🎉 concluída' : fmt(aporte)+'/mês'}</td></tr>`; }).join('');
+  wrap.innerHTML = `<table><thead><tr><th>Meta</th><th style="text-align:right;">Guardado</th><th style="text-align:right;">Alvo</th><th>Progresso</th><th>Prazo</th><th style="text-align:right;">Aporte necessário</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+function accountChequeUsado(acc){ if(acc.saldoAtual >= 0) return 0; return Math.min(Math.abs(acc.saldoAtual), acc.limiteChequeEspecial||0); }
+function accountChequePct(acc){ if(!acc.limiteChequeEspecial) return 0; return Math.min(100, (accountChequeUsado(acc)/acc.limiteChequeEspecial)*100); }
+function renderAccountsSection(){
+  const contasF = contasNoEscopo();
+  const totalSaldo = contasF.reduce((s,a)=>s+(a.saldoAtual||0),0); const saldoPF = contasF.filter(a=>accountTipo(a)==='PF').reduce((s,a)=>s+(a.saldoAtual||0),0); const saldoPJ = contasF.filter(a=>accountTipo(a)==='PJ').reduce((s,a)=>s+(a.saldoAtual||0),0); const totalChequeUsado = contasF.reduce((s,a)=> s + accountChequeUsado(a), 0);
+  const porTitular = {}; contasF.forEach(a=>{ accountTitulares(a).forEach(t=>{ porTitular[t] = (porTitular[t]||0) + (a.saldoAtual||0); }); });
+  const cardsTitular = Object.entries(porTitular).sort((a,b)=>b[1]-a[1]).map(([t,v])=>`<div class="summary-item"><div class="eyebrow">Saldo — ${t}</div><div class="val">${v<0?'-':''}${fmt(Math.abs(v))}</div></div>`).join('');
+  document.getElementById('accountsSummaryStrip').innerHTML = `<div class="summary-item ${totalSaldo>=0?'ok':'danger'}"><div class="eyebrow">Saldo total (todas)</div><div class="val">${totalSaldo<0?'-':''}${fmt(Math.abs(totalSaldo))}</div></div><div class="summary-item"><div class="eyebrow">Saldo Pessoa Física</div><div class="val">${saldoPF<0?'-':''}${fmt(Math.abs(saldoPF))}</div></div><div class="summary-item"><div class="eyebrow">Saldo Pessoa Jurídica</div><div class="val">${saldoPJ<0?'-':''}${fmt(Math.abs(saldoPJ))}</div></div>${cardsTitular}<div class="summary-item ${totalChequeUsado>0?'warn':''}"><div class="eyebrow">Comprometido no cheque especial</div><div class="val">${fmt(totalChequeUsado)}</div></div><div class="summary-item"><div class="eyebrow">Contas cadastradas</div><div class="val">${contasF.length}</div></div>`;
+  renderAccountsList(); renderAccountsTotalsTable(); renderTransfers();
+}
+function renderAccountsList(){
+  const col = document.getElementById('accountsCol'); let html = '';
+  contasNoEscopo().forEach((acc,i)=>{ const pct = accountChequePct(acc); const usado = accountChequeUsado(acc); const colors = CARD_COLORS[i % CARD_COLORS.length]; const barColor = pct>90 ? '#e1543d' : pct>60 ? '#e8a33d' : '#fff'; html += `<div class="credit-card" style="background:linear-gradient(135deg,${colors[0]},${colors[1]})" data-accountid="${acc.id}"><button class="del-btn" data-accountdel="${acc.id}" title="Excluir">✕</button><button class="edit-btn" data-accountedit="${acc.id}" title="Editar">✎</button><div class="top-row"><div class="chip"></div><span style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; padding:3px 8px; border-radius:20px; background:rgba(255,255,255,.18); color:#fff;">${accountTipoLabel(accountTipo(acc))}</span></div><div><div class="name">${acc.nome}</div><div class="dates">${[acc.banco, acc.titular].filter(Boolean).join(' · ')}</div></div><div><div class="bottom-row" style="margin-bottom:8px;"><span>saldo hoje: <span class="used">${acc.saldoAtual<0?'-':''}${fmt(Math.abs(acc.saldoAtual||0))}</span></span></div>${acc.limiteChequeEspecial ? `<div class="bar-track"><div class="bar-fill" style="width:${pct}%; background:${barColor};"></div></div><div class="bottom-row"><span>cheque especial: <span class="used">${fmt(usado)}</span></span><span>limite ${fmt(acc.limiteChequeEspecial)}</span></div>` : ''}</div></div>`; });
+  html += `<button class="add-card-btn" id="addAccountBtn">+ Adicionar conta</button>`;
+  col.innerHTML = html;
+  col.querySelectorAll('[data-accountdel]').forEach(btn=>{ btn.addEventListener('click', (ev)=>{ ev.stopPropagation(); showConfirm('Excluir esta conta?', ()=>{ state.accounts = state.accounts.filter(a=>a.id!==btn.dataset.accountdel); save(); render(); }); }); });
+  col.querySelectorAll('[data-accountedit]').forEach(btn=>{ btn.addEventListener('click', (ev)=>{ ev.stopPropagation(); const acc = state.accounts.find(a=>a.id===btn.dataset.accountedit); openAccountForm(acc); }); });
+  const addBtn = document.getElementById('addAccountBtn'); if(addBtn) addBtn.addEventListener('click', ()=>openAccountForm(null));
+}
+function openAccountForm(editAcc){
+  const col = document.getElementById('accountsCol'); const isEdit = !!editAcc;
+  const wrap = document.createElement('div'); wrap.className = 'panel'; wrap.style.padding='18px';
+  wrap.innerHTML = `<div class="form-grid"><div><label>Nome da conta</label><input id="ac-nome" placeholder="Ex: Conta corrente" value="${isEdit ? editAcc.nome.replace(/"/g,'"') : ''}"></div><div><label>Banco</label><input id="ac-banco" placeholder="Ex: Nubank, Itaú..." value="${isEdit ? (editAcc.banco||'').replace(/"/g,'"') : ''}"></div><div><label>Tipo de conta</label><select id="ac-tipo"><option value="PF" ${!isEdit || (editAcc.tipo||'PF')==='PF' ? 'selected':''}>Pessoa Física (PF)</option><option value="PJ" ${isEdit && editAcc.tipo==='PJ' ? 'selected':''}>Pessoa Jurídica (PJ)</option></select></div><div><label>Titular (opcional)</label><input id="ac-titular" placeholder="Ex: Pedro · ou Pedro e Raquel" value="${isEdit ? (editAcc.titular||'').replace(/"/g,'"') : ''}"></div><div><label>Saldo atual (R$)</label><input id="ac-saldo" type="number" placeholder="0,00" value="${isEdit ? editAcc.saldoAtual : ''}"></div><div><label>Limite cheque especial (opcional)</label><input id="ac-limite" type="number" placeholder="0,00" value="${isEdit && editAcc.limiteChequeEspecial ? editAcc.limiteChequeEspecial : ''}"></div><div><label>Juros a.m. do cheque especial (%)</label><input id="ac-juros" type="number" step="0.1" placeholder="0,0" value="${isEdit && editAcc.taxaJurosMensal ? editAcc.taxaJurosMensal : ''}"></div></div><div style="display:flex; gap:8px;"><button class="btn btn-primary" id="saveAccountBtn">${isEdit ? 'Salvar alterações' : 'Salvar conta'}</button><button class="btn btn-ghost" id="cancelAccountBtn">Cancelar</button></div>`;
+  col.insertBefore(wrap, col.lastElementChild);
+  document.getElementById('cancelAccountBtn').addEventListener('click', ()=>wrap.remove());
+  document.getElementById('saveAccountBtn').addEventListener('click', ()=>{
+    const nome = document.getElementById('ac-nome').value.trim(); const banco = document.getElementById('ac-banco').value.trim();
+    const saldoAtual = parseFloat(document.getElementById('ac-saldo').value)||0; const limiteChequeEspecial = parseFloat(document.getElementById('ac-limite').value)||0;
+    const taxaJurosMensal = parseFloat(document.getElementById('ac-juros').value)||0; const tipo = document.getElementById('ac-tipo').value || 'PF'; const titular = document.getElementById('ac-titular').value.trim();
+    if(!nome){ showAlert('Informe o nome da conta.'); return; }
+    if(isEdit){ Object.assign(editAcc, { nome, banco, saldoAtual, limiteChequeEspecial, taxaJurosMensal, tipo, titular }); }
+    else { state.accounts.push({ id: uid(), nome, banco, saldoAtual, limiteChequeEspecial, taxaJurosMensal, tipo, titular }); }
+    save(); render();
+  });
+}
+function openTransferForm(){
+  const contas = state.accounts || [];
+  if(contas.length < 2){ showAlert('Você precisa de pelo menos duas contas cadastradas para transferir.'); return; }
+  const opts = contas.map(a=>`<option value="${a.id}">${a.nome}${a.banco?' ('+a.banco+')':''}</option>`).join('');
+  const overlay = dialogOverlay(`<div class="panel-head"><h2>Transferir entre contas</h2></div><p style="font-size:12.5px; color:var(--text-muted); margin:0 0 14px; line-height:1.5;">O valor sai de uma conta e entra na outra. Não é receita nem despesa.</p><div class="form-grid" style="grid-template-columns:1fr;"><div><label>Conta de origem (de onde sai)</label><select id="tr-from">${opts}</select></div><div><label>Conta de destino (para onde vai)</label><select id="tr-to">${opts}</select></div><div><label>Valor (R$)</label><input id="tr-valor" type="number" step="0.01" placeholder="0,00"></div><div><label>Data</label><input id="tr-data" type="date" value="${todayStr()}"></div><div><label>Descrição (opcional)</label><input id="tr-desc" placeholder="Ex: compensação da fatura"></div></div><div id="tr-error" style="color:var(--coral); font-size:13px; min-height:18px; margin:8px 0;"></div><div style="display:flex; gap:8px;"><button class="btn btn-primary" id="tr-save">Transferir</button><button class="btn btn-ghost" id="tr-cancel">Cancelar</button></div>`);
+  const toSel = overlay.querySelector('#tr-to'); if(toSel.options.length > 1) toSel.selectedIndex = 1;
+  overlay.querySelector('#tr-cancel').addEventListener('click', ()=>overlay.remove());
+  overlay.querySelector('#tr-save').addEventListener('click', ()=>{
+    const fromId = overlay.querySelector('#tr-from').value; const toId = overlay.querySelector('#tr-to').value;
+    const valor = parseFloat(overlay.querySelector('#tr-valor').value)||0; const data = overlay.querySelector('#tr-data').value || todayStr();
+    const descricao = overlay.querySelector('#tr-desc').value.trim(); const err = overlay.querySelector('#tr-error');
+    if(fromId === toId){ err.textContent = 'Escolha contas diferentes para origem e destino.'; return; }
+    if(valor <= 0){ err.textContent = 'Informe um valor maior que zero.'; return; }
+    const from = state.accounts.find(a=>a.id===fromId); const to = state.accounts.find(a=>a.id===toId);
+    if(!from || !to){ err.textContent = 'Conta não encontrada.'; return; }
+    from.saldoAtual = (from.saldoAtual||0) - valor; to.saldoAtual = (to.saldoAtual||0) + valor;
+    if(!state.transfers) state.transfers = [];
+    state.transfers.unshift({ id: uid(), ts: new Date().toISOString(), data, fromId, toId, valor, descricao });
+    save(); overlay.remove(); render();
+  });
+}
+function renderTransfers(){
+  const wrap = document.getElementById('accountsTransfersWrap'); if(!wrap) return;
+  const list = state.transfers || []; const escopoIds = new Set(contasNoEscopo().map(a=>a.id));
+  const visible = list.filter(t=> escopoIds.has(t.fromId) || escopoIds.has(t.toId));
+  if(visible.length===0){ wrap.innerHTML = '<div class="empty">Nenhuma transferência registrada.</div>'; return; }
+  const nome = id => { const a = state.accounts.find(x=>x.id===id); return a ? a.nome : '(conta removida)'; };
+  const rows = visible.slice(0,20).map(t=>{ const d = t.data ? t.data.split('-').reverse().join('/') : ''; return `<tr><td class="mono" style="white-space:nowrap;">${d}</td><td>${nome(t.fromId)} <span style="color:var(--text-muted);">→</span> ${nome(t.toId)}${t.descricao?` <span style="color:var(--text-muted); font-size:12px;">· ${t.descricao}</span>`:''}</td><td class="val-cell mono">${fmt(t.valor)}</td><td style="text-align:right;"><button class="btn btn-ghost" data-undotransfer="${t.id}" style="padding:5px 10px; font-size:12px;">Desfazer</button></td></tr>`; }).join('');
+  wrap.innerHTML = `<table><thead><tr><th>Data</th><th>Transferência</th><th style="text-align:right;">Valor</th><th></th></tr></thead><tbody>${rows}</tbody></table>`;
+  wrap.querySelectorAll('[data-undotransfer]').forEach(btn=>{ btn.addEventListener('click', ()=>{ showConfirm('Desfazer esta transferência? O valor volta para a conta de origem.', ()=>{ const idx = (state.transfers||[]).findIndex(x=>x.id===btn.dataset.undotransfer); if(idx<0) return; const t = state.transfers[idx]; const from = state.accounts.find(a=>a.id===t.fromId); const to = state.accounts.find(a=>a.id===t.toId); if(from) from.saldoAtual = (from.saldoAtual||0) + t.valor; if(to) to.saldoAtual = (to.saldoAtual||0) - t.valor; state.transfers.splice(idx,1); save(); render(); }); }); });
+}
+function renderAccountsTotalsTable(){
+  const wrap = document.getElementById('accountsTotalsTable'); const contasF = contasNoEscopo();
+  if(contasF.length===0){ wrap.innerHTML = '<div class="empty">Nenhuma conta neste filtro.</div>'; return; }
+  let rows = contasF.map((acc,i)=>{ const usado = accountChequeUsado(acc); const pct = accountChequePct(acc); const color = CHART_COLORS[i % CHART_COLORS.length]; return `<tr><td><span style="display:inline-block;width:9px;height:9px;border-radius:3px;background:${color};margin-right:8px;"></span>${acc.nome}</td><td class="val-cell" style="color:${acc.saldoAtual<0?'var(--coral)':'var(--text)'}">${acc.saldoAtual<0?'-':''}${fmt(Math.abs(acc.saldoAtual||0))}</td><td class="val-cell">${acc.limiteChequeEspecial ? fmt(acc.limiteChequeEspecial) : '-'}</td><td class="val-cell">${usado>0 ? fmt(usado) : '-'}</td><td class="mono" style="color:${pct>80?'var(--coral)':pct>50?'var(--amber)':'var(--mint)'}">${acc.limiteChequeEspecial ? pct.toFixed(0)+'%' : '-'}</td></tr>`; }).join('');
+  const totalSaldo = contasF.reduce((s,a)=>s+(a.saldoAtual||0),0); const totalUsado = contasF.reduce((s,a)=>s+accountChequeUsado(a),0);
+  wrap.innerHTML = `<table><thead><tr><th>Conta</th><th style="text-align:right;">Saldo atual</th><th style="text-align:right;">Limite cheque esp.</th><th style="text-align:right;">Usado</th><th>% usado</th></tr></thead><tbody>${rows}</tbody><tfoot><tr style="border-top:1px solid var(--line);"><td style="padding-top:10px; font-weight:600;">Total</td><td class="val-cell" style="padding-top:10px; font-weight:600;">${fmt(totalSaldo)}</td><td></td><td class="val-cell" style="padding-top:10px; font-weight:600;">${fmt(totalUsado)}</td><td></td></tr></tfoot></table>`;
+}
+
+function renderBoardSection(){
+  const board = boardById(appView); if(!board) return;
+  document.getElementById('boardTitle').textContent = board.nome;
+  const idx = state.navOrder.indexOf(board.id);
+  const moveLeftBtn = document.getElementById('boardMoveLeftBtn'); const moveRightBtn = document.getElementById('boardMoveRightBtn');
+  moveLeftBtn.disabled = idx<=0; moveRightBtn.disabled = idx>=state.navOrder.length-1;
+  moveLeftBtn.style.opacity = idx<=0 ? '0.4' : '1'; moveRightBtn.style.opacity = idx>=state.navOrder.length-1 ? '0.4' : '1';
+  const itensF = board.items.filter(itemNoEscopo);
+  const totalMensal = itensF.reduce((s,it)=> s + it.parcelaValor, 0); const totalSaldo = itensF.reduce((s,it)=> s + boardItemRemaining(it), 0);
+  document.getElementById('boardSummaryStrip').innerHTML = `<div class="summary-item"><div class="eyebrow">Parcela mensal total</div><div class="val">${fmt(totalMensal)}</div></div><div class="summary-item warn"><div class="eyebrow">Saldo devedor total</div><div class="val">${fmt(totalSaldo)}</div></div><div class="summary-item"><div class="eyebrow">Itens cadastrados</div><div class="val">${itensF.length}</div></div>`;
+  renderBoardItems(board); document.getElementById('boardTotalsTable').innerHTML = buildBoardTotalsHTML(board); renderBoardMonthChart(board);
+}
+function renderBoardItems(board){
+  const col = document.getElementById('boardItemsCol'); let html = '';
+  board.items.filter(itemNoEscopo).forEach((it,i)=>{ const pago = it.parcelaAtual - 1; const pctPago = it.parcelasTotal>0 ? Math.min(100, (pago/it.parcelasTotal)*100) : 0; const colors = CARD_COLORS[i % CARD_COLORS.length]; html += `<div class="credit-card" style="background:linear-gradient(135deg,${colors[0]},${colors[1]})" data-itemid="${it.id}"><button class="del-btn" data-itemdel="${it.id}" title="Excluir">✕</button><button class="edit-btn" data-itemedit="${it.id}" title="Editar">✎</button><div class="top-row"><div class="chip"></div></div><div><div class="name">${it.nome}</div><div class="dates">${it.credor ? it.credor + ' · ' : ''}Vence dia ${it.vencimento}</div><div class="dates" style="margin-top:2px;">${itemTitularLabel(it) ? '👤 '+itemTitularLabel(it) : '<span style=\'color:#ffcf8a;\'>⚠ sem titular</span>'}</div></div><div><div class="bar-track"><div class="bar-fill" style="width:${pctPago}%; background:#fff;"></div></div><div class="bottom-row"><span>parcela: <span class="used">${it.parcelaAtual}/${it.parcelasTotal}</span></span><span>${fmt(it.parcelaValor)}/mês</span></div>${boardItemLiquidacaoHoje(it) ? `<div class="dates" style="margin-top:4px;">Liquidação hoje: ${fmt(boardItemLiquidacaoHoje(it))}${it.descontoPercent ? ' ('+it.descontoPercent+'% desc.)' : ''}</div>` : ''}</div></div>`; });
+  html += `<button class="add-card-btn" id="addBoardItemBtn">+ Adicionar item</button>`;
+  col.innerHTML = html;
+  col.querySelectorAll('[data-itemdel]').forEach(btn=>{ btn.addEventListener('click', (ev)=>{ ev.stopPropagation(); showConfirm('Excluir este item?', ()=>{ board.items = board.items.filter(it=>it.id!==btn.dataset.itemdel); save(); render(); }); }); });
+  col.querySelectorAll('[data-itemedit]').forEach(btn=>{ btn.addEventListener('click', (ev)=>{ ev.stopPropagation(); const it = board.items.find(it=>it.id===btn.dataset.itemedit); openBoardItemForm(board, it); }); });
+  const addBtn = document.getElementById('addBoardItemBtn'); if(addBtn) addBtn.addEventListener('click', ()=>openBoardItemForm(board, null));
+}
+function openBoardItemForm(board, editItem){
+  const col = document.getElementById('boardItemsCol'); const isEdit = !!editItem;
+  const wrap = document.createElement('div'); wrap.className = 'panel'; wrap.style.padding='18px';
+  wrap.innerHTML = `<div class="form-grid"><div style="grid-column:span 2;"><label>Nome</label><input id="bf-nome" placeholder="Ex: Financiamento do carro" value="${isEdit ? editItem.nome.replace(/"/g,'"') : ''}"></div><div><label>Credor / detalhe</label><input id="bf-credor" placeholder="Ex: Banco X" value="${isEdit ? (editItem.credor||'').replace(/"/g,'"') : ''}"></div><div><label>Dia do vencimento</label><input id="bf-venc" type="number" min="1" max="31" placeholder="10" value="${isEdit ? editItem.vencimento : ''}"></div><div><label>Valor da parcela (R$)</label><input id="bf-valor" type="number" placeholder="0,00" value="${isEdit ? editItem.parcelaValor : ''}"></div><div><label>Parcela atual</label><input id="bf-atual" type="number" min="1" value="${isEdit ? editItem.parcelaAtual : 1}"></div><div><label>Total de parcelas</label><input id="bf-total" type="number" min="1" value="${isEdit ? editItem.parcelasTotal : ''}"></div><div><label>Data de referência</label><input id="bf-data" type="date" value="${isEdit ? editItem.data : todayStr()}"></div><div><label>Desconto de liquidação hoje (%)</label><input id="bf-desconto" type="number" step="0.1" min="0" max="100" placeholder="Ex: 15" value="${isEdit && editItem.descontoPercent ? editItem.descontoPercent : ''}"></div>${camposTitularHTML(isEdit ? editItem : null, 'bf')}<div><label>Debitado de qual conta</label><select id="bf-conta"><option value="">— não informado —</option>${state.accounts.map(a=>`<option value="${a.id}" ${isEdit && editItem.accountId===a.id?'selected':''}>${a.nome}${a.banco ? ' ('+a.banco+')' : ''}</option>`).join('')}</select></div></div><div style="display:flex; gap:8px;"><button class="btn btn-primary" id="saveBoardItemBtn">${isEdit ? 'Salvar alterações' : 'Salvar item'}</button><button class="btn btn-ghost" id="cancelBoardItemBtn">Cancelar</button></div>`;
+  col.insertBefore(wrap, col.lastElementChild);
+  document.getElementById('cancelBoardItemBtn').addEventListener('click', ()=>wrap.remove());
+  document.getElementById('saveBoardItemBtn').addEventListener('click', ()=>{
+    const nome = document.getElementById('bf-nome').value.trim(); const credor = document.getElementById('bf-credor').value.trim();
+    const vencimento = parseInt(document.getElementById('bf-venc').value)||1; const parcelaValor = parseFloat(document.getElementById('bf-valor').value)||0;
+    let parcelaAtual = parseInt(document.getElementById('bf-atual').value)||1; let parcelasTotal = parseInt(document.getElementById('bf-total').value)||1;
+    const data = document.getElementById('bf-data').value || todayStr(); const descontoRaw = document.getElementById('bf-desconto').value;
+    const descontoPercent = descontoRaw ? parseFloat(descontoRaw) : null; const accountId = document.getElementById('bf-conta').value || null;
+    const titular = document.getElementById('bf-titular').value.trim(); const tipo = document.getElementById('bf-tipo').value || null;
+    if(!nome){ showAlert('Informe o nome do item.'); return; } if(parcelaValor<=0){ showAlert('Informe um valor de parcela válido.'); return; }
+    if(parcelaAtual > parcelasTotal) parcelaAtual = parcelasTotal;
+    if(isEdit){ Object.assign(editItem, { nome, credor, vencimento, parcelaValor, parcelaAtual, parcelasTotal, data, descontoPercent, accountId, titular, tipo }); }
+    else { board.items.push({ id: uid(), nome, credor, vencimento, parcelaValor, parcelaAtual, parcelasTotal, data, descontoPercent, accountId, titular, tipo }); }
+    save(); render();
+  });
+}
+function renderBoardMonthChart(board){
+  const wrap = document.getElementById('boardMonthChart'); if(!wrap) return;
+  const itensG = board.items.filter(itemNoEscopo);
+  if(itensG.length===0){ wrap.innerHTML = '<div class="empty">Nenhum item neste filtro.</div>'; return; }
+  const totals = {}; itensG.forEach(it=> totals[it.id] = {});
+  itensG.forEach(it=>{ const remaining = it.parcelasTotal - it.parcelaAtual; const key = it.data.slice(0,7); totals[it.id][key] = (totals[it.id][key]||0) + it.parcelaValor; for(let i=1;i<=remaining;i++){ const fkey = addMonthsKey(it.data, i); totals[it.id][fkey] = (totals[it.id][fkey]||0) + it.parcelaValor; } });
+  const allKeys = new Set(); Object.values(totals).forEach(byMonth => Object.keys(byMonth).forEach(k=>allKeys.add(k)));
+  if(allKeys.size===0){ wrap.innerHTML = '<div class="empty">Sem dados ainda.</div>'; return; }
+  const sortedKeys = Array.from(allKeys).sort(); const keys = []; let cursor = sortedKeys[0]; const last = sortedKeys[sortedKeys.length-1];
+  while(true){ keys.push(cursor); if(cursor === last) break; cursor = addMonthsKey(cursor+'-01', 1); }
+  const currentKey = todayStr().slice(0,7); const labelFor = k=>{ const [y,m] = k.split('-'); return MONTH_NAMES[parseInt(m,10)-1]+'/'+y.slice(2); };
+  const stackTotals = keys.map(k => itensG.reduce((s,it)=> s + (totals[it.id][k]||0), 0)); const max = Math.max(...stackTotals, 1);
+  const barW = 46, gap = 22, chartH = 170, leftPad = 10; const width = keys.length * (barW+gap) + leftPad*2;
+  let bars = '';
+  keys.forEach((k,i)=>{ const x = leftPad + i*(barW+gap); const isFuture = k > currentKey; let yCursor = chartH; let segs = ''; itensG.forEach((it,ii)=>{ const val = totals[it.id][k] || 0; if(val<=0) return; const h = (val/max)*(chartH-30); const y = yCursor - h; const color = CHART_COLORS[ii % CHART_COLORS.length]; const fill = isFuture ? color+'55' : color; const stroke = isFuture ? `stroke="${color}" stroke-width="1.2" stroke-dasharray="3,2"` : ''; segs += `<rect x="${x}" y="${y}" width="${barW}" height="${h}" fill="${fill}" ${stroke}></rect>`; yCursor = y; }); const totalVal = stackTotals[i]; bars += `<g>${segs}<text x="${x+barW/2}" y="${chartH-((totalVal/max)*(chartH-30))-8}" text-anchor="middle" fill="#edeff2" font-family="IBM Plex Mono, monospace" font-size="11">${fmt(totalVal).replace('R$ ','')}</text><text x="${x+barW/2}" y="${chartH+18}" text-anchor="middle" fill="#8ea0b3" font-family="IBM Plex Mono, monospace" font-size="11">${labelFor(k)}${isFuture?' *':''}</text></g>`; });
+  const legend = itensG.map((it,i)=>`<span><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:${CHART_COLORS[i%CHART_COLORS.length]};margin-right:6px;"></span>${it.nome}</span>`).join('');
+  wrap.innerHTML = `<div style="overflow-x:auto;"><svg width="${Math.max(width,300)}" height="${chartH+40}" viewBox="0 0 ${Math.max(width,300)} ${chartH+40}">${bars}</svg></div><div style="display:flex; gap:16px; flex-wrap:wrap; margin-top:12px; font-size:12px; color:var(--text-muted);">${legend}</div><div style="margin-top:6px; font-size:11.5px; color:var(--text-muted);">* meses com parcelas previstas (ainda não pagas)</div>`;
+}
+
+function addNewBoard(){
+  showPrompt('Nome da nova tabela (ex: Assinaturas, Empréstimos):', '', (nomeRaw)=>{
+    const nome = (nomeRaw || '').trim(); if(!nome) return;
+    const board = { id: uid(), nome, items: [] }; state.boards.push(board); state.navOrder.push(board.id); appView = board.id; save(); render();
+  });
+}
+function renameCurrentBoard(){ const board = boardById(appView); if(!board) return; showPrompt('Novo nome da tabela:', board.nome, (nomeRaw)=>{ const nome = (nomeRaw || '').trim(); if(!nome) return; board.nome = nome; save(); render(); }); }
+function deleteCurrentBoard(){ const board = boardById(appView); if(!board) return; showConfirm('Excluir a tabela "'+board.nome+'" e todos os seus itens?', ()=>{ state.boards = state.boards.filter(b=>b.id!==board.id); state.navOrder = state.navOrder.filter(k=>k!==board.id); appView = 'resumo'; save(); render(); }); }
+
+let fluxoMonth = todayStr().slice(0,7);
+function faturaMesDaCompra(card, dataStr){ const baseMonth = dataStr.slice(0,7); if(!card || !card.fechamento) return baseMonth; const dia = parseInt(dataStr.slice(8,10),10); return dia > card.fechamento ? addMonthsKey(dataStr, 1) : baseMonth; }
+function computeCardMonthlyTotal(cardId, monthKey){
+  const card = state.cards.find(c=>c.id===cardId); let total = 0;
+  state.transactions.filter(t=>t.cardId===cardId).forEach(t=>{
+    const tipo = txTipo(t); const primeiraFatura = faturaMesDaCompra(card, t.data);
+    if(primeiraFatura === monthKey){ total += t.valor; return; }
+    let remaining = 0;
+    if(tipo==='parcelado'){ const totalP = t.parcelasTotal || t.parcelas || 1; const atual = t.parcelaAtual || 1; remaining = totalP - atual; }
+    else if(tipo==='recorrente'){ remaining = t.mesesProjecao || 12; }
+    for(let i=1;i<=remaining;i++){ if(addMonthsKey(primeiraFatura+'-01', i)===monthKey){ total += t.valor; } }
+  });
+  return total;
+}
+function computeBoardItemMonthlyTotal(item, monthKey){ const baseMonth = item.data.slice(0,7); if(baseMonth === monthKey) return item.parcelaValor; const remaining = item.parcelasTotal - item.parcelaAtual; for(let i=1;i<=remaining;i++){ if(addMonthsKey(item.data,i)===monthKey) return item.parcelaValor; } return 0; }
+function buildFluxoEntries(monthKey){
+  const entries = [];
+  cartoesNoEscopo().forEach(c=>{ const val = computeCardMonthlyTotal(c.id, monthKey); if(val>0){ const autoId = 'card:'+c.id+':'+monthKey; entries.push({ id:autoId, auto:true, autoType:'card', tipo:'despesa', descricao:c.nome, categoria:'Cartão de crédito', dia:c.vencimento, valor:val, pago: !!state.autoPaidMap[autoId], accountId: c.accountId||null }); } });
+  state.boards.forEach(b=>{ b.items.filter(itemNoEscopo).forEach(it=>{ const val = computeBoardItemMonthlyTotal(it, monthKey); if(val>0){ const autoId = 'board:'+it.id+':'+monthKey; entries.push({ id:autoId, auto:true, autoType:'board', tipo:'despesa', descricao:it.nome, categoria:b.nome, dia:it.vencimento, valor:val, pago: !!state.autoPaidMap[autoId], accountId: it.accountId||null }); } }); });
+  state.cashFlowEntries.forEach(e=>{
+    const lancTipo = e.lancamentoTipo || 'unica'; const baseMonth = e.data.slice(0,7); const dia = parseInt(e.data.slice(8,10),10);
+    if(lancTipo==='unica'){ if(baseMonth===monthKey){ entries.push({ id:e.id, sourceId:e.id, auto:false, editableSource:true, tipo:e.tipo, descricao:e.descricao, categoria:e.categoria||'-', dia, valor:e.valor, pago:!!e.pago, lancamentoTipo:'unica', natureza:e.natureza||null, accountId:e.accountId||null, titular:e.titular||null, tipoPessoa:e.tipoPessoa||null }); } return; }
+    let occurs = (baseMonth===monthKey); let parcelaAtualNoMes = e.parcelaAtual || 1;
+    if(!occurs){ if(lancTipo==='parcelado'){ const total = e.parcelasTotal||1, atual = e.parcelaAtual||1; const remaining = total - atual; for(let i=1;i<=remaining;i++){ if(addMonthsKey(e.data,i)===monthKey){ occurs=true; parcelaAtualNoMes = atual+i; break; } } } else if(lancTipo==='recorrente'){ const remaining = e.mesesProjecao || 12; for(let i=1;i<=remaining;i++){ if(addMonthsKey(e.data,i)===monthKey){ occurs=true; break; } } } }
+    if(occurs){ const autoId = 'manual:'+e.id+':'+monthKey; entries.push({ id:autoId, sourceId:e.id, auto:true, editableSource:true, autoType:'manual', tipo:e.tipo, descricao:e.descricao, categoria:e.categoria||'-', dia, valor:e.valor, pago: !!state.autoPaidMap[autoId], lancamentoTipo:lancTipo, parcelaAtual:parcelaAtualNoMes, parcelasTotal:e.parcelasTotal, natureza:e.natureza||null, accountId:e.accountId||null, titular:e.titular||null, tipoPessoa:e.tipoPessoa||null }); }
+  });
+  entries.sort((a,b)=> a.dia - b.dia);
+  return entries.filter(e => (e.autoType==='card' || e.autoType==='board') ? true : entradaNoEscopo(e));
+}
+function toggleFluxoPago(entry){ if(entry.auto){ state.autoPaidMap[entry.id] = !entry.pago; } else { const e = state.cashFlowEntries.find(x=>x.id===entry.id); if(e) e.pago = !e.pago; } save(); render(); }
+const WEEKDAY_NAMES = ['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado'];
+
+function renderFluxoSaldoChart(dayBalances){
+  const wrap = document.getElementById('fluxoSaldoChart'); if(!wrap) return;
+  if(dayBalances.length<=1){ wrap.innerHTML = '<div class="empty">Sem dados ainda.</div>'; return; }
+  const W = 560, H = 220, padL = 50, padR = 16, padT = 18, padB = 28; const plotW = W - padL - padR, plotH = H - padT - padB;
+  const values = dayBalances.map(d=>d.saldo); const maxV = Math.max(...values, 0); const minV = Math.min(...values, 0); const range = (maxV - minV) || 1;
+  const xFor = i => padL + (i/(dayBalances.length-1)) * plotW; const yFor = v => padT + (1 - (v - minV)/range) * plotH; const zeroY = yFor(0);
+  const linePoints = dayBalances.map((d,i)=> `${xFor(i)},${yFor(d.saldo)}`).join(' ');
+  const posPts = dayBalances.map((d,i)=> `${xFor(i)},${yFor(Math.max(d.saldo,0))}`).join(' ');
+  const negPts = dayBalances.map((d,i)=> `${xFor(i)},${yFor(Math.min(d.saldo,0))}`).join(' ');
+  const minPoint = dayBalances.reduce((min,d,i)=> d.saldo < dayBalances[min].saldo ? i : min, 0);
+  const maxPoint = dayBalances.reduce((max,d,i)=> d.saldo > dayBalances[max].saldo ? i : max, 0);
+  const dayLabels = dayBalances.map((d,i)=>{ if(i===0) return ''; if(dayBalances.length>10 && i % Math.ceil(dayBalances.length/8) !== 0 && i!==dayBalances.length-1) return ''; return `<text x="${xFor(i)}" y="${H-8}" text-anchor="middle" fill="#8ea0b3" font-family="IBM Plex Mono, monospace" font-size="10">${d.dia}</text>`; }).join('');
+  wrap.innerHTML = `<svg width="100%" height="${H}" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" style="overflow:visible;"><line x1="${padL}" y1="${zeroY}" x2="${W-padR}" y2="${zeroY}" stroke="#324055" stroke-width="1" stroke-dasharray="4,3"></line><text x="${padL-8}" y="${zeroY+4}" text-anchor="end" fill="#8ea0b3" font-family="IBM Plex Mono, monospace" font-size="10">R$ 0</text><polygon points="${padL},${zeroY} ${posPts} ${W-padR},${zeroY}" fill="#4fd1a5" opacity="0.25"></polygon><polygon points="${padL},${zeroY} ${negPts} ${W-padR},${zeroY}" fill="#e1543d" opacity="0.28"></polygon><polyline points="${linePoints}" fill="none" stroke="#edeff2" stroke-width="2"></polyline><circle cx="${xFor(minPoint)}" cy="${yFor(values[minPoint])}" r="4" fill="${values[minPoint]<0?'#e1543d':'#4fd1a5'}"></circle><circle cx="${xFor(maxPoint)}" cy="${yFor(values[maxPoint])}" r="4" fill="#4fd1a5"></circle><text x="${xFor(minPoint)}" y="${yFor(values[minPoint]) + (values[minPoint]<0 ? 16 : -10)}" text-anchor="middle" fill="${values[minPoint]<0?'#e1543d':'#4fd1a5'}" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="600">${fmt(values[minPoint]).replace('R$ ','')}</text>${dayLabels}</svg><div style="display:flex; gap:16px; margin-top:8px; font-size:12px; color:var(--text-muted);"><span><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:rgba(79,209,165,.4);margin-right:6px;"></span>Saldo positivo</span><span><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:rgba(225,84,61,.4);margin-right:6px;"></span>Saldo negativo</span></div>`;
+}
+function donutArcPath(cx, cy, r, rInner, startAngle, endAngle){ const toXY = (angle, radius) => [cx + radius*Math.cos(angle), cy + radius*Math.sin(angle)]; const [x1,y1] = toXY(startAngle, r); const [x2,y2] = toXY(endAngle, r); const [x3,y3] = toXY(endAngle, rInner); const [x4,y4] = toXY(startAngle, rInner); const largeArc = (endAngle - startAngle) > Math.PI ? 1 : 0; return `M ${x1} ${y1} A ${r} ${r} 0 ${largeArc} 1 ${x2} ${y2} L ${x3} ${y3} A ${rInner} ${rInner} 0 ${largeArc} 0 ${x4} ${y4} Z`; }
+function renderFluxoOrigemChart(entries){
+  const wrap = document.getElementById('fluxoOrigemChart'); if(!wrap) return;
+  const despesas = entries.filter(e=>e.tipo==='despesa'); const cartaoTotal = despesas.filter(e=>e.auto && e.autoType==='card').reduce((s,e)=>s+e.valor,0); const boardsTotal = despesas.filter(e=>e.auto && e.autoType==='board').reduce((s,e)=>s+e.valor,0); const manualTotal = despesas.filter(e=>!e.auto).reduce((s,e)=>s+e.valor,0);
+  const slices = [{ label:'Cartões de crédito', valor:cartaoTotal, color:'#4fd1a5' },{ label:'Financiamentos/tabelas', valor:boardsTotal, color:'#e8a33d' },{ label:'Outras contas', valor:manualTotal, color:'#8b7fd6' }].filter(s=>s.valor>0);
+  const total = slices.reduce((s,x)=>s+x.valor,0); if(total<=0){ wrap.innerHTML = '<div class="empty">Sem despesas neste mês.</div>'; return; }
+  const cx=90, cy=90, r=80, rInner=48; let angle = -Math.PI/2; let paths = '';
+  slices.forEach(s=>{ const sliceAngle = (s.valor/total) * Math.PI*2; paths += `<path d="${donutArcPath(cx,cy,r,rInner,angle,angle+sliceAngle)}" fill="${s.color}"></path>`; angle += sliceAngle; });
+  const legend = slices.map(s=>`<div style="display:flex; justify-content:space-between; gap:12px; font-size:13px; padding:4px 0;"><span><span style="display:inline-block;width:9px;height:9px;border-radius:3px;background:${s.color};margin-right:8px;"></span>${s.label}</span><span class="mono" style="color:var(--text-muted);">${fmt(s.valor)} · ${(s.valor/total*100).toFixed(0)}%</span></div>`).join('');
+  wrap.innerHTML = `<div style="display:flex; gap:20px; align-items:center; flex-wrap:wrap;"><svg width="180" height="180" viewBox="0 0 180 180">${paths}<text x="90" y="86" text-anchor="middle" fill="var(--text-muted)" font-family="IBM Plex Mono, monospace" font-size="10">total</text><text x="90" y="102" text-anchor="middle" fill="var(--text)" font-family="IBM Plex Mono, monospace" font-size="13" font-weight="600">${fmt(total).replace('R$ ','R$')}</text></svg><div style="flex:1; min-width:160px;">${legend}</div></div>`;
+}
+function renderFluxoFixoVariavel(entries){
+  const wrap = document.getElementById('fluxoFixoVariavel'); if(!wrap) return;
+  const despesas = entries.filter(e=>e.tipo==='despesa'); const fixo = despesas.filter(e=>e.natureza==='fixo').reduce((s,e)=>s+e.valor,0); const variavel = despesas.filter(e=>e.natureza==='variavel').reduce((s,e)=>s+e.valor,0); const semClassificar = despesas.filter(e=>!e.natureza).reduce((s,e)=>s+e.valor,0); const total = fixo + variavel + semClassificar;
+  if(total<=0){ wrap.innerHTML = '<div class="empty">Sem despesas neste mês.</div>'; return; }
+  const rows = [{ label:'Fixo', valor:fixo, color:'#4fd1a5' },{ label:'Variável', valor:variavel, color:'#e8a33d' },{ label:'Não classificado', valor:semClassificar, color:'#8ea0b3' }].filter(r=>r.valor>0); const max = Math.max(...rows.map(r=>r.valor));
+  wrap.innerHTML = `<div class="bars">${rows.map(r=>`<div class="bar-row"><div>${r.label}</div><div class="bar-bg"><div class="bar-fg" style="width:${(r.valor/max*100)}%; background:${r.color};"></div></div><div class="amt">${fmt(r.valor)} · ${(r.valor/total*100).toFixed(0)}%</div></div>`).join('')}</div>${semClassificar>0 ? '<div style="font-size:12px; color:var(--text-muted); margin-top:10px;">Dica: edite os lançamentos e escolha "Fixo" ou "Variável" na Natureza para ver esse recorte completo.</div>' : ''}`;
+}
+function renderFluxoRecorrentesList(){
+  const wrap = document.getElementById('fluxoRecorrentesList'); if(!wrap) return;
+  const recorrentes = state.cashFlowEntries.filter(e=>(e.lancamentoTipo||'unica')!=='unica');
+  if(recorrentes.length===0){ wrap.innerHTML = '<div class="empty">Nenhum lançamento recorrente ou parcelado cadastrado.</div>'; return; }
+  const rows = recorrentes.map(e=>{ const tipoLabel = e.lancamentoTipo==='recorrente' ? 'Recorrente' : `Parcelado ${e.parcelaAtual||1}/${e.parcelasTotal||1}`; return `<tr><td>${e.descricao}</td><td style="color:var(--text-muted);">${e.categoria||'-'}</td><td><span class="tag" style="color:${e.tipo==='receita'?'var(--mint)':'var(--coral)'};">${e.tipo}</span></td><td class="mono">${tipoLabel}</td><td class="val-cell">${fmt(e.valor)}</td><td style="white-space:nowrap;"><button class="row-del" data-fluxoedit="${e.id}" title="Editar">✎</button><button class="row-del" data-fluxodup="${e.id}" title="Duplicar">⧉</button><button class="row-del" data-fluxodel="${e.id}" title="Excluir">✕</button></td></tr>`; }).join('');
+  wrap.innerHTML = `<table><thead><tr><th>Descrição</th><th>Categoria</th><th>Tipo</th><th>Recorrência</th><th style="text-align:right;">Valor</th><th></th></tr></thead><tbody>${rows}</tbody></table>`;
+  wrap.querySelectorAll('[data-fluxoedit]').forEach(btn=>{ btn.addEventListener('click', ()=>{ const e = state.cashFlowEntries.find(x=>x.id===btn.dataset.fluxoedit); openFluxoEntryForm(e.tipo, e); }); });
+  wrap.querySelectorAll('[data-fluxodup]').forEach(btn=>{ btn.addEventListener('click', ()=>{ const e = state.cashFlowEntries.find(x=>x.id===btn.dataset.fluxodup); openFluxoEntryForm(e.tipo, e, true); }); });
+  wrap.querySelectorAll('[data-fluxodel]').forEach(btn=>{ btn.addEventListener('click', ()=>{ showConfirm('Excluir este lançamento recorrente/parcelado? Todas as ocorrências futuras somem junto.', ()=>{ state.cashFlowEntries = state.cashFlowEntries.filter(e=>e.id!==btn.dataset.fluxodel); save(); render(); }); }); });
+}
+function renderFluxoOrcamentoForm(){
+  const wrap = document.getElementById('flux
